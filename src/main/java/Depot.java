@@ -1,30 +1,63 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Depot
-{
+public class Depot {
 	private Vehicle vehicle;
 	private Vehicle[] vehicles = new Vehicle[5];
-	private Driver driver;
-	private Driver[] drivers = new Driver[5];
+	private static Driver driver;
+	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
 	private WorkSchedule[] workSchedules = new WorkSchedule[2];
+	private static Scanner input = new Scanner(System.in);
 
 	private String depotLocation;
 
-	public Depot(String depotLocation) throws Exception
-	{
+	public Depot(String depotLocation) throws Exception {
 		this.depotLocation = depotLocation;
 		for (int i = 0; i < 5; i++) {
 			vehicles[i] = new Vehicle(); // creates 5 vehicle & driver instances
-			drivers[i] = new Driver();
-		}
 
-		workSchedules[0] = new WorkSchedule("Krusty Crab", LocalDate.parse("2020-03-20"), LocalDate.parse("2020-03-22"));
-		workSchedules[1] = new WorkSchedule("Chum Bucket", LocalDate.parse("2020-03-20"), LocalDate.parse("2020-03-22"));
+		}
+		drivers.add(new Driver("Spongebob", "Gary1", false));
+		drivers.add(new Driver("Homer", "Donut1", false));
+		drivers.add(new Driver("Bart", "Shorts1", false));
+		System.out.println(drivers.toString());
+
+
+		// Creating 3 unique drivers
+
+		/*
+		 * workSchedules[0] = new WorkSchedule("Krusty Crab",
+		 * LocalDate.parse("2020-03-31"), LocalDate.parse("2020-04-02"));
+		 * workSchedules[1] = new WorkSchedule("Chum Bucket",
+		 * LocalDate.parse("2020-03-31"), LocalDate.parse("2020-04-02"));
+		 */
 	}
 
-	public void logOn() {
+	public  void logOn() {
+		String uName;
+		String pWord;
+		do {
+			System.out.println("Please enter your username: ");
+			uName = input.nextLine();
 
+			System.out.println("Please enter your password: ");
+			pWord = input.nextLine();
+
+		} while (!authenticate(uName, pWord));
+	}
+
+	public boolean authenticate(String uName, String pWord) {
+		for (Driver driver : drivers) {
+			driver.display();
+			if (uName.equals(driver.userName) && pWord.equals(driver.passWord)) {
+				System.out.printf("Welcome back %s", uName);
+				return true;
+			}
+		}
+		System.out.printf("Incorrect login credentials please try again %n%n");
+		return false;
 	}
 
 	public Vehicle getVehicle() {
@@ -46,8 +79,8 @@ public class Depot
 	}
 
 	public void listDrivers() {
-		for (int i = 0; i < drivers.length; i++) {
-			System.out.println(drivers[i].toString());
+		for (Driver driver : drivers) {
+			driver.toString();
 		}
 
 	}
@@ -60,8 +93,7 @@ public class Depot
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return depotLocation;
 	}
 }

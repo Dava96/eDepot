@@ -1,14 +1,17 @@
-public class Driver
-{
+public class Driver {
 	protected String userName;
 	protected String passWord;
 	private boolean assigned; // not sure if this is private or protected yet
 
-	public Driver() {
+
+
+
+	public Driver(String userName, String passWord, boolean assigned) {
 		// test
-		this.userName = "Spongebob";
-		this.passWord = "Gary1";
-		this.assigned = false;
+		this.userName = userName;
+		this.passWord = passWord;
+		this.assigned = assigned;
+
 	}
 
 	public boolean checkPassword() {
@@ -25,7 +28,6 @@ public class Driver
 
 	}
 
-
 	public String toString() {
 		return userName + " " + passWord;
 	}
@@ -36,5 +38,12 @@ public class Driver
 			// I need to read the labs on nested classes, but I'm sure this will be one
 		}
 	}
+
+	public void display(){ //This is just so we can see all the objects in the driver array
+		System.out.println("Name: "+this.userName);
+		System.out.println("Password: "+this.passWord);
+
+	}
+
 
 }
