@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b15a0295-1074-4ed6-9824-314558fbb2e1" name="Default Changelist" comment="Implemented Logon System">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Tanker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Truck.java" afterDir="false" />
+    <list default="true" id="b15a0295-1074-4ed6-9824-314558fbb2e1" name="Default Changelist" comment="Vehicle Inheritence">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Depot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Depot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DepotSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DepotSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Vehicle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +92,14 @@
       <workItem from="1584744431851" duration="102000" />
       <workItem from="1585043471305" duration="1358000" />
     </task>
+    <task id="LOCAL-00001" summary="Vehicle Inheritence">
+      <created>1585070389635</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1585070389635</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,7 +118,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented Logon System" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Logon System" />
+    <MESSAGE value="Vehicle Inheritence" />
+    <option name="LAST_COMMIT_MESSAGE" value="Vehicle Inheritence" />
   </component>
   <component name="WindowStateProjectService">
     <state x="0" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584644522946">
@@ -127,10 +130,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="730" y="222" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584645930533" />
-    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1585070323183">
+    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1585070420529">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585070323183" />
+    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585070420529" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1584724323878">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
