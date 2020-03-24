@@ -33,7 +33,7 @@ public class DepotSystem {
 			case "3":
 				System.exit(0);
 				//exit the system
-				//test
+				//test 2
 			}
 
 		} while (true);
