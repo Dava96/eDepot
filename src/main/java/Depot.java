@@ -50,7 +50,6 @@ public class Depot {
 
 	public boolean authenticate(String uName, String pWord) {
 		for (Driver driver : drivers) {
-			driver.display();
 			if (uName.equals(driver.userName) && pWord.equals(driver.passWord)) {
 				System.out.printf("Welcome back %s", uName);
 				return true;
