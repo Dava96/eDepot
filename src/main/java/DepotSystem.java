@@ -31,6 +31,7 @@ public class DepotSystem {
 				// Create a work schedule
 				break;
 			case "3":
+				input.close();
 				System.exit(0);
 				//exit the system
 				//test 2

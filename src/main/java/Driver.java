@@ -8,8 +8,8 @@ public class Driver {
 
 	public Driver(String userName, String passWord, boolean assigned) {
 		// test
-		this.userName = userName;
-		this.passWord = passWord;
+		this.userName = userName.trim();
+		this.passWord = passWord.trim();
 		this.assigned = assigned;
 
 	}

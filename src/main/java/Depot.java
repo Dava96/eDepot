@@ -15,10 +15,7 @@ public class Depot {
 
 	public Depot(String depotLocation) throws Exception {
 		this.depotLocation = depotLocation;
-		for (int i = 0; i < 5; i++) {
-			vehicles[i] = new Vehicle(); // creates 5 vehicle & driver instances
 
-		}
 		drivers.add(new Driver("Spongebob", "Gary1", false));
 		drivers.add(new Driver("Homer", "Donut1", false));
 		drivers.add(new Driver("Bart", "Shorts1", false));
@@ -45,7 +42,7 @@ public class Depot {
 			System.out.println("Please enter your password: ");
 			pWord = input.nextLine();
 
-		} while (!authenticate(uName, pWord));
+		} while (!authenticate(uName.trim(), pWord.trim()));
 	}
 
 	public boolean authenticate(String uName, String pWord) {
