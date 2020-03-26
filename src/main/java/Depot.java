@@ -32,7 +32,7 @@ public class Depot {
 		 */
 	}
 
-	public  void logOn() {
+	public String logOn() {
 		String uName;
 		String pWord;
 		do {
@@ -43,6 +43,7 @@ public class Depot {
 			pWord = input.nextLine();
 
 		} while (!authenticate(uName.trim(), pWord.trim()));
+		return uName;
 	}
 
 	public boolean authenticate(String uName, String pWord) {
@@ -50,10 +51,12 @@ public class Depot {
 			if (uName.equals(driver.userName) && pWord.equals(driver.passWord)) {
 				System.out.printf("Welcome back %s", uName);
 				return true;
+				
 			}
 		}
 		System.out.printf("Incorrect login credentials please try again %n%n");
 		return false;
+		
 	}
 
 	public Vehicle getVehicle() {
