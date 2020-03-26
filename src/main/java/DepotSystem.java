@@ -10,8 +10,9 @@ public class DepotSystem {
 
 	public void run() {
 		String choice;
+		String userName;
 		while (true) {
-			depot.logOn();
+			userName = depot.logOn();
 
 			// System.out.println(getDepot().toString()); depot.listVehicles();
 			// depot.listDrivers(); depot.listWorkSchedulue();
@@ -25,6 +26,8 @@ public class DepotSystem {
 
 			switch (choice) {
 			case "1":
+				System.out.println(userName); // Just a test to see that the log on method is returning the correct
+												// username
 				// View work schedule method will appear here
 				break;
 			case "2":
@@ -33,8 +36,8 @@ public class DepotSystem {
 			case "3":
 				input.close();
 				System.exit(0);
-				//exit the system
-				//test 2
+				// exit the system
+				// test 2
 			}
 
 		} while (true);
