@@ -29,7 +29,7 @@ public class WorkSchedule
 	}
 
 	public void setEndDate(LocalDate endDate) throws Exception {
-		if (endDate.isAfter(LocalDate.now().plusDays(1)) && endDate.isBefore(LocalDate.now().plusDays(4))) {
+		if (endDate.isAfter(LocalDate.now().plusDays(1)) && endDate.isBefore(startDate.plusDays(4))) {
 			this.endDate = endDate; // i think the spec said it had to be delivered in 72 hours, so this checks for that
 		}
 		else {

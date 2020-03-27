@@ -8,7 +8,7 @@ public class Depot {
 	private static Driver driver;
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
-	private WorkSchedule[] workSchedules = new WorkSchedule[2];
+	private ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
 	private static Scanner input = new Scanner(System.in);
 
 	private String depotLocation;
@@ -20,7 +20,6 @@ public class Depot {
 		drivers.add(new Driver("Homer", "Donut1", false));
 		drivers.add(new Driver("Bart", "Shorts1", false));
 		System.out.println(drivers.toString());
-
 
 		// Creating 3 unique drivers
 
@@ -51,12 +50,12 @@ public class Depot {
 			if (uName.equals(driver.userName) && pWord.equals(driver.passWord)) {
 				System.out.printf("Welcome back %s", uName);
 				return true;
-				
+
 			}
 		}
 		System.out.printf("Incorrect login credentials please try again %n%n");
 		return false;
-		
+
 	}
 
 	public Vehicle getVehicle() {
@@ -68,6 +67,32 @@ public class Depot {
 	}
 
 	public void setUpWorkSchedule() {
+
+		do { // Loop is necessary to allow re entry of data should any erroneous dates be
+				// inputed
+			System.out.println("Please enter a client name: ");
+			String client = input.nextLine();
+
+			System.out.println("Please enter a start date (yyyy-mm-dd): ");
+			String startDate = input.nextLine();
+
+			System.out.println("Please enter an end date (yyyy-mm-dd): ");
+			String endDate = input.nextLine();
+			try {
+				// Try and create an object of the work schedule class with the user defined
+				// parameters
+				WorkSchedule schedule = new WorkSchedule(client, LocalDate.parse(startDate), LocalDate.parse(endDate));
+				workSchedules.add(schedule);
+				System.out.printf("%nWork schedule successfully created %n%n");
+				break;
+			} catch (Exception e) {
+				// If there is an issue with the dates the user entered they will be told as
+				// such and prompted to re enter with correct parameters
+				System.out.println(e.getMessage());
+				System.out.printf("%nPlease enter a valid date this time %n%n");
+
+			}
+		} while (true);
 
 	}
 
@@ -85,8 +110,8 @@ public class Depot {
 	}
 
 	public void listWorkSchedulue() {
-		for (int i = 0; i < workSchedules.length; i++) {
-			System.out.println(workSchedules[i].toString());
+		for (int i = 0; i < workSchedules.size(); i++) {
+			System.out.println(workSchedules.toString());
 			// this is just a test to see if it works, it's probably not needed
 		}
 	}
