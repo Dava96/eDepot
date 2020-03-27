@@ -8,7 +8,7 @@ public class DepotSystem {
 		setDepot("Liverpool");
 	}
 
-	public void run() {
+	public void run() throws Exception {
 		String choice;
 		String userName;
 		while (true) {
@@ -21,7 +21,7 @@ public class DepotSystem {
 		}
 		do {
 			System.out.printf(
-					"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] Exit %n%nSelect your option: ");
+					"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] View work schedules %n[4] Exit %n%nSelect your option: ");
 			choice = input.next();
 
 			switch (choice) {
@@ -32,12 +32,16 @@ public class DepotSystem {
 				break;
 			case "2":
 				// Create a work schedule
+				depot.setUpWorkSchedule();
 				break;
 			case "3":
+				// Not sure if needed this is mainly for testing purposes
+				depot.listWorkSchedulue();
+				break;
+			case "4":
 				input.close();
 				System.exit(0);
 				// exit the system
-				// test 2
 			}
 
 		} while (true);
