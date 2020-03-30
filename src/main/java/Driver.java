@@ -2,15 +2,17 @@ public class Driver {
 	protected String userName;
 	protected String passWord;
 	private boolean assigned; // not sure if this is private or protected yet
+	private boolean isManager; // to check if a driver is a manager or not
 
 
 
 
-	public Driver(String userName, String passWord, boolean assigned) {
+	public Driver(String userName, String passWord, boolean assigned, boolean isManager) {
 		// test
 		this.userName = userName.trim();
 		this.passWord = passWord.trim();
 		this.assigned = assigned;
+		this.isManager = isManager;
 
 	}
 
@@ -37,6 +39,10 @@ public class Driver {
 		public Manager() {
 			// I need to read the labs on nested classes, but I'm sure this will be one
 		}
+	}
+	
+	public boolean getIsManager() {
+		return isManager;
 	}
 
 	public void display(){ //This is just so we can see all the objects in the driver array
