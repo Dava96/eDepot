@@ -16,9 +16,9 @@ public class Depot {
 	public Depot(String depotLocation) throws Exception {
 		this.depotLocation = depotLocation;
 
-		drivers.add(new Driver("Spongebob", "Gary1", false));
-		drivers.add(new Driver("Homer", "Donut1", false));
-		drivers.add(new Driver("Bart", "Shorts1", false));
+		drivers.add(new Driver("Spongebob", "Gary1", false, false));
+		drivers.add(new Driver("Homer", "Donut1", false, true));
+		drivers.add(new Driver("Bart", "Shorts1", false, false));
 		System.out.println(drivers.toString());
 
 		// Creating 3 unique drivers
@@ -48,7 +48,8 @@ public class Depot {
 	public boolean authenticate(String uName, String pWord) {
 		for (Driver driver : drivers) {
 			if (uName.equals(driver.userName) && pWord.equals(driver.passWord)) {
-				System.out.printf("Welcome back %s", uName);
+				System.out.printf("%nWelcome back %s%n", uName);
+				DepotSystem.setIsManager(driver.getIsManager());
 				return true;
 
 			}
@@ -70,13 +71,13 @@ public class Depot {
 
 		do { // Loop is necessary to allow re entry of data should any erroneous dates be
 				// inputed
-			System.out.println("Please enter a client name: ");
+			System.out.printf("%nPlease enter a client name: ");
 			String client = input.nextLine();
 
-			System.out.println("Please enter a start date (yyyy-mm-dd): ");
+			System.out.printf("%nPlease enter a start date (yyyy-mm-dd): ");
 			String startDate = input.nextLine();
 
-			System.out.println("Please enter an end date (yyyy-mm-dd): ");
+			System.out.printf("%nPlease enter an end date (yyyy-mm-dd): ");
 			String endDate = input.nextLine();
 			try {
 				// Try and create an object of the work schedule class with the user defined
