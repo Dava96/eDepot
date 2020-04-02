@@ -16,9 +16,25 @@ public class Driver {
 
 	}
 
-	public boolean checkPassword() {
+	public static boolean checkPassword(String passWord) {
+		// this shouldn't be static it only is at the moment because theres no way to create a new driver account yet
+		char[] capsCheck;
+		if (passWord.length() >= 8) {
+			capsCheck = passWord.toCharArray();
+			for (char c : capsCheck) {
+				if (Character.isUpperCase(c)) {
+					return true;
+				} else {
+					System.out.println("Password didn't contain a capital letter");
+					return false;
+				}
+			}
+			System.out.println("Password is not over 8 characters long");
+			return true;
+		}
 		// check to see if the password is over a length etc...
-		return true;
+		System.out.println("Password is not over 8 characters long");
+		return false;
 	}
 
 	public boolean isAvaliable() {
@@ -31,7 +47,7 @@ public class Driver {
 	}
 
 	public String toString() {
-		return userName + " " + passWord;
+		return String.format(" %s %s %s %s", userName, passWord, assigned, isManager);
 	}
 
 	public class Manager {
