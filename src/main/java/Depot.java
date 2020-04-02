@@ -19,6 +19,10 @@ public class Depot {
 		drivers.add(new Driver("Spongebob", "Gary1", false, false));
 		drivers.add(new Driver("Homer", "Donut1", false, true));
 		drivers.add(new Driver("Bart", "Shorts1", false, false));
+
+		System.out.println(driver.checkPassword("Donuts21")); // checkPassword testing
+		System.out.println(driver.checkPassword("Donuts1"));
+		System.out.println(driver.checkPassword("donuts21"));
 		System.out.println(drivers.toString());
 
 		// Creating 3 unique drivers

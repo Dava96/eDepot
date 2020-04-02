@@ -22,7 +22,7 @@ public class DepotSystem {
 			break;
 		}
 
-		if (isManager == true) {
+		if (isManager) {
 			do {
 				System.out.printf(
 						"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] View work schedules %n[4] Exit %n%nSelect your option: ");
