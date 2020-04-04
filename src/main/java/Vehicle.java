@@ -7,8 +7,8 @@ public abstract class Vehicle
 	public Vehicle(String make, String model, int weight, String regNo) {
 		this.make = "Toyota";
 		this.model = "CS23";
-		this.regNo = "454564";
 		this.weight = 4090;
+		this.regNo = "454564";
 		this.assigned = false;
 	}
 

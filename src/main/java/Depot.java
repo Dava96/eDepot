@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Depot {
 	private Vehicle vehicle;
-	private Vehicle[] vehicles = new Vehicle[5];
+	private ArrayList<Vehicle> vehicles = new ArrayList<>();
 	private static Driver driver;
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
@@ -16,13 +16,9 @@ public class Depot {
 	public Depot(String depotLocation) throws Exception {
 		this.depotLocation = depotLocation;
 
-		drivers.add(new Driver("Spongebob", "Gary1", false, false));
-		drivers.add(new Driver("Homer", "Donut1", false, true));
-		drivers.add(new Driver("Bart", "Shorts1", false, false));
-
-		System.out.println(driver.checkPassword("Donuts21")); // checkPassword testing
-		System.out.println(driver.checkPassword("Donuts1"));
-		System.out.println(driver.checkPassword("donuts21"));
+		drivers.add(new Driver("Spongebob", "Garysnail1", false, false));
+		drivers.add(new Driver("Homer", "Donuts20", false, true));
+		drivers.add(new Driver("Bart", "Shorts19", false, false));
 		System.out.println(drivers.toString());
 
 		// Creating 3 unique drivers
@@ -36,8 +32,7 @@ public class Depot {
 	}
 
 	public String logOn() {
-		String uName;
-		String pWord;
+		String uName, pWord;
 		do {
 			System.out.println("Please enter your username: ");
 			uName = input.nextLine();
@@ -102,8 +97,8 @@ public class Depot {
 	}
 
 	public void listVehicles() {
-		for (int i = 0; i < vehicles.length; i++) {
-			System.out.println(vehicles[i].toString());
+		for (Vehicle vehicle : vehicles) {
+			vehicle.toString();
 		}
 	}
 

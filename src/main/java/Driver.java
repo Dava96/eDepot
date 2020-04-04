@@ -10,19 +10,20 @@ public class Driver {
 	public Driver(String userName, String passWord, boolean assigned, boolean isManager) {
 		// test
 		this.userName = userName.trim();
-		this.passWord = passWord.trim();
+		checkPassword(passWord.trim());
 		this.assigned = assigned;
 		this.isManager = isManager;
 
 	}
 
-	public static boolean checkPassword(String passWord) {
-		// this shouldn't be static it only is at the moment because theres no way to create a new driver account yet
+	public boolean checkPassword(String passWord) {
+		// need to write the exception for this
 		char[] capsCheck;
 		if (passWord.length() >= 8) {
 			capsCheck = passWord.toCharArray();
 			for (char c : capsCheck) {
 				if (Character.isUpperCase(c)) {
+					setPassWord(passWord);
 					return true;
 				} else {
 					System.out.println("Password didn't contain a capital letter");
@@ -37,6 +38,10 @@ public class Driver {
 		return false;
 	}
 
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
+	}
+
 	public boolean isAvaliable() {
 		if (assigned) return true;
 		return false; // returns false if assigned = true
@@ -47,7 +52,7 @@ public class Driver {
 	}
 
 	public String toString() {
-		return String.format(" %s %s %s %s", userName, passWord, assigned, isManager);
+		return String.format("%s %s %s %s", userName, passWord, assigned, isManager);
 	}
 
 	public class Manager {
