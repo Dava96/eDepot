@@ -10,7 +10,29 @@ public class DepotSystem {
 		setDepot("Liverpool");
 	}
 
-	public void run() throws Exception {
+	public void entryMenu() throws Exception
+	{
+		String choice = "";
+		do
+		{
+			System.out.println("Entry Menu");
+			System.out.println("[1] Logon");
+			System.out.println("[2] Quit");
+			System.out.print("Pick: ");
+			choice = input.nextLine();
+
+			switch (choice) { // this is the way glyn has it setup in his video, so I've replicated it
+				case "1":
+					run();
+					break;
+			}
+		}
+		while (!choice.equals("2"));
+		input.close();
+		depot = null;
+	}
+
+	private void run() throws Exception {
 		String choice;
 		String userName;
 		while (true) {
@@ -44,17 +66,16 @@ public class DepotSystem {
 					depot.listWorkSchedulue();
 					break;
 				case "4":
-					input.close();
-					System.exit(0);
+					entryMenu();
+					break;
 					// exit the system
 				}
 
 			} while (true);
 		} else {
-			
 			do {
 				System.out.printf("%n[1] View your assigned work schedule %n[2] Exit %n%nSelect your option: ");
-				choice = input.next();
+				choice = input.nextLine();
 				
 				switch(choice) {
 				case "1":
@@ -62,8 +83,8 @@ public class DepotSystem {
 					// View assigned work schedule method executes here
 					break;
 				case "2":
-					input.close();
-					System.exit(0);
+					entryMenu();
+					break;
 				}
 			} while (true);
 		}
