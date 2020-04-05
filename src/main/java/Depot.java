@@ -9,7 +9,7 @@ public class Depot {
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
 	private ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
-	private static Scanner input = new Scanner(System.in);
+	private final static Scanner input = new Scanner(System.in);
 
 	private String depotLocation;
 
@@ -34,10 +34,10 @@ public class Depot {
 	public String logOn() {
 		String uName, pWord;
 		do {
-			System.out.println("Please enter your username: ");
+			System.out.print("Please enter your username: ");
 			uName = input.nextLine();
 
-			System.out.println("Please enter your password: ");
+			System.out.print("Please enter your password: ");
 			pWord = input.nextLine();
 
 		} while (!authenticate(uName.trim(), pWord.trim()));
