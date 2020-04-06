@@ -47,12 +47,12 @@ public class DepotSystem {
 		if (isManager) {
 			do {
 				System.out.printf(
-						"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] View work schedules %n[4] Exit %n%nSelect your option: ");
+						"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] Set a work schedule %n[4] Exit %n%nSelect your option: ");
 				choice = input.next();
 
 				switch (choice) {
 				case "1":
-					System.out.println(userName); // Just a test to see that the log on method is returning the correct
+					System.out.println(Driver.getSchedule()); // Just a test to see that the log on method is returning the correct
 													// username
 					System.out.println(isManager);
 					// View work schedule method will appear here
@@ -63,7 +63,7 @@ public class DepotSystem {
 					break;
 				case "3":
 					// Not sure if needed this is mainly for testing purposes
-					depot.listWorkSchedulue();
+					Driver.setSchedulue();
 					break;
 				case "4":
 					entryMenu();
@@ -79,8 +79,8 @@ public class DepotSystem {
 				
 				switch(choice) {
 				case "1":
-					System.out.println(userName);
-					// View assigned work schedule method executes here
+					
+					System.out.println(Driver.getSchedule());
 					break;
 				case "2":
 					entryMenu();

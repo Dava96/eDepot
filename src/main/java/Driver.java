@@ -1,9 +1,12 @@
+import java.util.Scanner;
+
 public class Driver {
 	protected String userName;
 	protected String passWord;
 	private boolean assigned; // not sure if this is private or protected yet
 	private boolean isManager; // to check if a driver is a manager or not
-
+	private static Scanner input = new Scanner(System.in);
+	private static WorkSchedule schedule;
 
 
 
@@ -47,8 +50,50 @@ public class Driver {
 		return false; // returns false if assigned = true
 	}
 
-	public void setSchedulue() {
+	public static void setSchedulue() {
+		String client;
+		String driver;
+		Boolean exit = false;
+		
+		do {
+			Depot.listWorkSchedulue();
+			System.out.printf("%nEnter the client name for the schedule you wish to assign: ");
+			client = input.nextLine();
+			for (WorkSchedule schedules : Depot.getWorkSchedules()) {
+				if (client.equals(WorkSchedule.GetClient())) {
+					System.out.printf("%nWhich driver do you want to assign this to?%n");
+					Depot.listDrivers();
+					driver = input.nextLine();
+					for (Driver drivers : Depot.getDrivers()) {
+						if (driver.equals(drivers.userName) && drivers.assigned == false) {
+							System.out.printf("%nThe work schedule for client %s is now assigned to %s%n", client,
+									driver);
+							schedule = schedules;
+							drivers.setAssigned(true);
+							exit = true;
+							break;
+							
+						} else {
+							System.out.printf("%nThis driver is either already assigned or does not exist.%n");
+							
+						}
+						
+						
+					}
+				
+					
+				} else {
+					System.out.printf("%nPlease select a valid client name%n");
+					
+				}
+			}
+		} while (exit = false);
 
+	}
+
+	private void setAssigned(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public String toString() {
@@ -72,5 +117,8 @@ public class Driver {
 
 	}
 
+	public static WorkSchedule getSchedule() {
+		return schedule;
+	}
 
 }
