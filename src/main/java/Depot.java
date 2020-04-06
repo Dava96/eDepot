@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Depot {
 	private Vehicle vehicle;
-	private ArrayList<Vehicle> vehicles = new ArrayList<>();
+	private Vehicle[] vehicles = new Vehicle[5];
 	private static Driver driver;
-	private ArrayList<Driver> drivers = new ArrayList<Driver>();
+	private static ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
-	private ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
-	private final static Scanner input = new Scanner(System.in);
+	private static ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
+	private static Scanner input = new Scanner(System.in);
 
 	private String depotLocation;
 
@@ -17,8 +17,11 @@ public class Depot {
 		this.depotLocation = depotLocation;
 
 		drivers.add(new Driver("Spongebob", "Garysnail1", false, false));
-		drivers.add(new Driver("Homer", "Donuts20", false, true));
-		drivers.add(new Driver("Bart", "Shorts19", false, false));
+		drivers.add(new Driver("Homer", "Donutdonut1", false, true));
+		drivers.add(new Driver("Bart", "Shortsshort1", false, false));
+
+		workSchedules.add(new WorkSchedule("Bob", LocalDate.parse("2020-05-05"), LocalDate.parse("2020-05-06")));
+		
 		System.out.println(drivers.toString());
 
 		// Creating 3 unique drivers
@@ -32,12 +35,13 @@ public class Depot {
 	}
 
 	public String logOn() {
-		String uName, pWord;
+		String uName;
+		String pWord;
 		do {
-			System.out.print("Please enter your username: ");
+			System.out.println("Please enter your username: ");
 			uName = input.nextLine();
 
-			System.out.print("Please enter your password: ");
+			System.out.println("Please enter your password: ");
 			pWord = input.nextLine();
 
 		} while (!authenticate(uName.trim(), pWord.trim()));
@@ -97,19 +101,19 @@ public class Depot {
 	}
 
 	public void listVehicles() {
-		for (Vehicle vehicle : vehicles) {
-			vehicle.toString();
+		for (int i = 0; i < vehicles.length; i++) {
+			System.out.println(vehicles[i].toString());
 		}
 	}
 
-	public void listDrivers() {
+	public static void listDrivers() {
 		for (Driver driver : drivers) {
-			driver.toString();
+			System.out.println(driver.toString());
 		}
 
 	}
 
-	public void listWorkSchedulue() {
+	public static void listWorkSchedulue() {
 		for (int i = 0; i < workSchedules.size(); i++) {
 			System.out.println(workSchedules.toString());
 			// this is just a test to see if it works, it's probably not needed
@@ -119,5 +123,13 @@ public class Depot {
 	@Override
 	public String toString() {
 		return depotLocation;
+	}
+	
+	public static ArrayList<WorkSchedule> getWorkSchedules() {
+		return workSchedules;
+	}
+	
+	public static ArrayList<Driver> getDrivers() {
+		return drivers;
 	}
 }
