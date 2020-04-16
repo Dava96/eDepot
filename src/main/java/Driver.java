@@ -60,7 +60,7 @@ public class Driver {
 			System.out.printf("%nEnter the client name for the schedule you wish to assign: ");
 			client = input.nextLine();
 			for (WorkSchedule schedules : Depot.getWorkSchedules()) {
-				if (client.equals(WorkSchedule.GetClient())) {
+				if (client.equals(schedules.getClient())) {
 					System.out.printf("%nWhich driver do you want to assign this to?%n");
 					Depot.listDrivers();
 					driver = input.nextLine();

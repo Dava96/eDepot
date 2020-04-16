@@ -29,7 +29,7 @@ public class DepotSystem {
 		}
 		while (!choice.equals("2"));
 		input.close();
-		depot = null;
+		System.exit(0);
 	}
 
 	private void run() throws Exception {
@@ -54,7 +54,7 @@ public class DepotSystem {
 				case "1":
 					System.out.println(Driver.getSchedule()); // Just a test to see that the log on method is returning the correct
 													// username
-					System.out.println(isManager);
+				
 					// View work schedule method will appear here
 					break;
 				case "2":
