@@ -5,7 +5,6 @@ public class Driver {
 	protected String passWord;
 	private boolean assigned; // not sure if this is private or protected yet
 	private boolean isManager; // to check if a driver is a manager or not
-	private static Scanner input = new Scanner(System.in);
 	private static WorkSchedule schedule;
 
 
@@ -58,14 +57,14 @@ public class Driver {
 		do {
 			Depot.listWorkSchedulue();
 			System.out.printf("%nEnter the client name for the schedule you wish to assign: ");
-			client = input.nextLine();
+			client = Depot.input.nextLine();
 			for (WorkSchedule schedules : Depot.getWorkSchedules()) {
 				if (client.equals(schedules.getClient())) {
 					System.out.printf("%nWhich driver do you want to assign this to?%n");
 					Depot.listDrivers();
-					driver = input.nextLine();
+					driver = Depot.input.nextLine();
 					for (Driver drivers : Depot.getDrivers()) {
-						if (driver.equals(drivers.userName) && drivers.assigned == false) {
+						if (driver.equals(drivers.userName) && !drivers.assigned) {
 							System.out.printf("%nThe work schedule for client %s is now assigned to %s%n", client,
 									driver);
 							schedule = schedules;
