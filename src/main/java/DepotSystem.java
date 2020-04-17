@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class DepotSystem {
 	private Depot depot;
-	private static Scanner input = new Scanner(System.in);
 	private static boolean isManager; // This variable lets the system know if the user is a manager or not, the menu
 										// shown will depend on this
 
@@ -19,7 +18,7 @@ public class DepotSystem {
 			System.out.println("[1] Logon");
 			System.out.println("[2] Quit");
 			System.out.print("Pick: ");
-			choice = input.nextLine();
+			choice = Depot.input.nextLine();
 
 			switch (choice) { // this is the way glyn has it setup in his video, so I've replicated it
 				case "1":
@@ -28,7 +27,7 @@ public class DepotSystem {
 			}
 		}
 		while (!choice.equals("2"));
-		input.close();
+		Depot.input.close();
 		System.exit(0);
 	}
 
@@ -48,7 +47,7 @@ public class DepotSystem {
 			do {
 				System.out.printf(
 						"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] Set a work schedule %n[4] Exit %n%nSelect your option: ");
-				choice = input.next();
+				choice = Depot.input.next();
 
 				switch (choice) {
 				case "1":
@@ -75,7 +74,7 @@ public class DepotSystem {
 		} else {
 			do {
 				System.out.printf("%n[1] View your assigned work schedule %n[2] Exit %n%nSelect your option: ");
-				choice = input.nextLine();
+				choice = Depot.input.nextLine();
 				
 				switch(choice) {
 				case "1":

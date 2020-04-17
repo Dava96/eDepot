@@ -9,7 +9,7 @@ public class Depot {
 	private static ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
 	private static ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
-	private static Scanner input = new Scanner(System.in);
+	public static final Scanner input = new Scanner(System.in); // This can be accessed from every class Depot.input
 
 	private String depotLocation;
 
