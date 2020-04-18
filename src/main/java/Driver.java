@@ -70,7 +70,43 @@ public class Driver {
 	}
 
 	public void setSchedule() throws Exception {
+		String client;
+		String driver;
+		Boolean exit = false;
 
+		do {
+			Depot.listWorkSchedulue();
+			System.out.printf("%nEnter the client name for the schedule you wish to assign: ");
+			client = Depot.input.nextLine();
+			for (WorkSchedule schedules : Depot.getWorkSchedules()) {
+				if (client.equals(schedules.getClient())) {
+					System.out.printf("%nWhich driver do you want to assign this to?%n");
+					depot.listDrivers();
+					driver = Depot.input.nextLine();
+					for (Driver drivers : depot.getDrivers()) {
+						if (driver.equals(drivers.userName) && !drivers.assigned) {
+							System.out.printf("%nThe work schedule for client %s is now assigned to %s%n", client,
+								driver);
+							schedule = schedules;
+							//drivers.setAssigned(true);
+							exit = true;
+							break;
+
+						} else {
+							System.out.printf("%nThis driver is either already assigned or does not exist.%n");
+
+						}
+
+
+					}
+
+
+				} else {
+					System.out.printf("%nPlease select a valid client name%n");
+
+				}
+			}
+		} while (exit = false);
 	}
 
 }
