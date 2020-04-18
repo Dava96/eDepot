@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Depot {
 	private Vehicle vehicle;
 	private Vehicle[] vehicles = new Vehicle[5];
-	private static Driver driver;
-	private static ArrayList<Driver> drivers = new ArrayList<Driver>();
+	private Driver driver;
+	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
 	private static ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
 	public static final Scanner input = new Scanner(System.in); // This can be accessed from every class Depot.input
@@ -23,18 +23,9 @@ public class Depot {
 		workSchedules.add(new WorkSchedule("Bob", LocalDate.parse("2020-05-05"), LocalDate.parse("2020-05-06")));
 		
 		System.out.println(drivers.toString());
-
-		// Creating 3 unique drivers
-
-		/*
-		 * workSchedules[0] = new WorkSchedule("Krusty Crab",
-		 * LocalDate.parse("2020-03-31"), LocalDate.parse("2020-04-02"));
-		 * workSchedules[1] = new WorkSchedule("Chum Bucket",
-		 * LocalDate.parse("2020-03-31"), LocalDate.parse("2020-04-02"));
-		 */
 	}
 
-	public String logOn() {
+	public Driver logOn() {
 		String uName;
 		String pWord;
 		do {
@@ -45,7 +36,7 @@ public class Depot {
 			pWord = input.nextLine();
 
 		} while (!authenticate(uName.trim(), pWord.trim()));
-		return uName;
+		return getDriver(uName);
 	}
 
 	public boolean authenticate(String uName, String pWord) {
@@ -67,6 +58,15 @@ public class Depot {
 	}
 
 	public Driver getDriver() {
+		return driver;
+	}
+
+	public Driver getDriver(String username) {
+		for (Driver driver : drivers) {
+			if (username.equals(driver.userName)) {
+				return driver;
+			}
+		}
 		return driver;
 	}
 
@@ -106,7 +106,7 @@ public class Depot {
 		}
 	}
 
-	public static void listDrivers() {
+	public void listDrivers() {
 		for (Driver driver : drivers) {
 			System.out.println(driver.toString());
 		}
@@ -129,7 +129,7 @@ public class Depot {
 		return workSchedules;
 	}
 	
-	public static ArrayList<Driver> getDrivers() {
+	public ArrayList<Driver> getDrivers() {
 		return drivers;
 	}
 }

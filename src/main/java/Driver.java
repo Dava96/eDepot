@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Driver {
@@ -5,17 +6,18 @@ public class Driver {
 	protected String passWord;
 	private boolean assigned; // not sure if this is private or protected yet
 	private boolean isManager; // to check if a driver is a manager or not
-	private static WorkSchedule schedule;
+	private Depot depot;
+	private WorkSchedule schedule;
 
 
-
-	public Driver(String userName, String passWord, boolean assigned, boolean isManager) {
+	public Driver(String userName, String passWord, boolean assigned, boolean isManager) throws Exception
+	{
 		// test
 		this.userName = userName.trim();
 		checkPassword(passWord.trim());
 		this.assigned = assigned;
 		this.isManager = isManager;
-
+		this.schedule = new WorkSchedule("David", LocalDate.parse("2020-04-20"), LocalDate.parse("2020-04-21"));
 	}
 
 	public boolean checkPassword(String passWord) {
@@ -49,75 +51,26 @@ public class Driver {
 		return false; // returns false if assigned = true
 	}
 
-	public static void setSchedulue() {
-		String client;
-		String driver;
-		Boolean exit = false;
-		
-		do {
-			Depot.listWorkSchedulue();
-			System.out.printf("%nEnter the client name for the schedule you wish to assign: ");
-			client = Depot.input.nextLine();
-			for (WorkSchedule schedules : Depot.getWorkSchedules()) {
-				if (client.equals(schedules.getClient())) {
-					System.out.printf("%nWhich driver do you want to assign this to?%n");
-					Depot.listDrivers();
-					driver = Depot.input.nextLine();
-					for (Driver drivers : Depot.getDrivers()) {
-						if (driver.equals(drivers.userName) && !drivers.assigned) {
-							System.out.printf("%nThe work schedule for client %s is now assigned to %s%n", client,
-									driver);
-							schedule = schedules;
-							drivers.setAssigned(true);
-							exit = true;
-							break;
-							
-						} else {
-							System.out.printf("%nThis driver is either already assigned or does not exist.%n");
-							
-						}
-						
-						
-					}
-				
-					
-				} else {
-					System.out.printf("%nPlease select a valid client name%n");
-					
-				}
-			}
-		} while (exit = false);
-
-	}
-
-	private void setAssigned(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public String toString() {
 		return String.format("%s %s %s %s", userName, passWord, assigned, isManager);
-	}
-
-	public class Manager {
-
-		public Manager() {
-			// I need to read the labs on nested classes, but I'm sure this will be one
-		}
 	}
 	
 	public boolean getIsManager() {
 		return isManager;
 	}
 
-	public void display(){ //This is just so we can see all the objects in the driver array
+	public void display() { //This is just so we can see all the objects in the driver array
 		System.out.println("Name: "+this.userName);
 		System.out.println("Password: "+this.passWord);
 
 	}
 
-	public static WorkSchedule getSchedule() {
+	public WorkSchedule getSchedule() throws Exception {
 		return schedule;
+	}
+
+	public void setSchedule() throws Exception {
+
 	}
 
 }

@@ -49,4 +49,9 @@ public class WorkSchedule
 	public String toString() {
 		return this.client + " " + this.startDate + " " + this.endDate;
 	}
+
+	public String getClient()
+	{
+		return client;
+	}
 }

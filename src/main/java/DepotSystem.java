@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class DepotSystem {
 	private Depot depot;
-	private static boolean isManager; // This variable lets the system know if the user is a manager or not, the menu
+	private static boolean isManager;
+	private Driver driver; // This variable lets the system know if the user is a manager or not, the menu
 										// shown will depend on this
 
 	public DepotSystem() throws Exception {
@@ -35,11 +36,7 @@ public class DepotSystem {
 		String choice;
 		String userName;
 		while (true) {
-			userName = depot.logOn();
-
-			// System.out.println(getDepot().toString()); depot.listVehicles();
-			// depot.listDrivers(); depot.listWorkSchedulue();
-
+			driver = depot.logOn();
 			break;
 		}
 
@@ -51,7 +48,7 @@ public class DepotSystem {
 
 				switch (choice) {
 				case "1":
-					System.out.println(Driver.getSchedule()); // Just a test to see that the log on method is returning the correct
+					System.out.println(driver.getSchedule()); // Just a test to see that the log on method is returning the correct
 													// username
 				
 					// View work schedule method will appear here
@@ -62,7 +59,7 @@ public class DepotSystem {
 					break;
 				case "3":
 					// Not sure if needed this is mainly for testing purposes
-					Driver.setSchedulue();
+					driver.setSchedule();
 					break;
 				case "4":
 					entryMenu();
@@ -78,8 +75,7 @@ public class DepotSystem {
 				
 				switch(choice) {
 				case "1":
-					
-					System.out.println(Driver.getSchedule());
+						System.out.println(driver.getSchedule());
 					break;
 				case "2":
 					entryMenu();
