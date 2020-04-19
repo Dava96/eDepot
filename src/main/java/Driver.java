@@ -17,7 +17,7 @@ public class Driver {
 		checkPassword(passWord.trim());
 		this.assigned = assigned;
 		this.isManager = isManager;
-		this.schedule = new WorkSchedule("David", LocalDate.parse("2020-04-20"), LocalDate.parse("2020-04-21"));
+		this.schedule = null;
 	}
 
 	public boolean checkPassword(String passWord) {
@@ -69,25 +69,31 @@ public class Driver {
 		return schedule;
 	}
 
-	public void setSchedule() throws Exception {
+	public void setSchedule(WorkSchedule workSchedule) throws Exception {
+		this.schedule = workSchedule;
+	}
+
+	public void assignSchedule(Depot depotName) throws Exception {
 		String client;
 		String driver;
+		WorkSchedule workSchedule;
 		Boolean exit = false;
 
 		do {
-			Depot.listWorkSchedulue();
-			System.out.printf("%nEnter the client name for the schedule you wish to assign: ");
-			client = Depot.input.nextLine();
-			for (WorkSchedule schedules : Depot.getWorkSchedules()) {
+			depotName.listWorkSchedulue();
+			System.out.print("Enter the client name for the schedule you wish to assign: ");
+			client = Depot.input.next();
+			for (WorkSchedule schedules : depotName.getWorkSchedules()) {
 				if (client.equals(schedules.getClient())) {
-					System.out.printf("%nWhich driver do you want to assign this to?%n");
-					depot.listDrivers();
-					driver = Depot.input.nextLine();
-					for (Driver drivers : depot.getDrivers()) {
+					System.out.print("Which driver do you want to assign this to?\n");
+					depotName.listDrivers();
+					driver = Depot.input.next();
+					for (Driver drivers : depotName.getDrivers()) {
 						if (driver.equals(drivers.userName) && !drivers.assigned) {
-							System.out.printf("%nThe work schedule for client %s is now assigned to %s%n", client,
+							System.out.printf("%nThe work schedule for client %s is now assigned to %s%n ", client,
 								driver);
-							schedule = schedules;
+							depotName.getDriver(driver).setSchedule(depotName.getWorkSchedule(client)); // this needs cleaning up badly
+							//schedule = schedules;
 							//drivers.setAssigned(true);
 							exit = true;
 							break;

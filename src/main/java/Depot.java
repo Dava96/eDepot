@@ -8,7 +8,7 @@ public class Depot {
 	private Driver driver;
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
-	private static ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
+	private ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
 	public static final Scanner input = new Scanner(System.in); // This can be accessed from every class Depot.input
 
 	private String depotLocation;
@@ -45,7 +45,6 @@ public class Depot {
 				System.out.printf("%nWelcome back %s%n", uName);
 				DepotSystem.setIsManager(driver.getIsManager());
 				return true;
-
 			}
 		}
 		System.out.printf("Incorrect login credentials please try again %n%n");
@@ -70,18 +69,18 @@ public class Depot {
 		return driver;
 	}
 
-	public void setUpWorkSchedule() {
+	public void createWorkSchedule() {
 
 		do { // Loop is necessary to allow re entry of data should any erroneous dates be
 				// inputed
-			System.out.printf("%nPlease enter a client name: ");
-			String client = input.nextLine();
+			System.out.print("Please enter a client name: ");
+			String client = input.next();
 
-			System.out.printf("%nPlease enter a start date (yyyy-mm-dd): ");
-			String startDate = input.nextLine();
+			System.out.print("Please enter a start date (yyyy-mm-dd): ");
+			String startDate = input.next();
 
-			System.out.printf("%nPlease enter an end date (yyyy-mm-dd): ");
-			String endDate = input.nextLine();
+			System.out.print("Please enter an end date (yyyy-mm-dd): ");
+			String endDate = input.next();
 			try {
 				// Try and create an object of the work schedule class with the user defined
 				// parameters
@@ -113,7 +112,7 @@ public class Depot {
 
 	}
 
-	public static void listWorkSchedulue() {
+	public void listWorkSchedulue() {
 		for (int i = 0; i < workSchedules.size(); i++) {
 			System.out.println(workSchedules.toString());
 			// this is just a test to see if it works, it's probably not needed
@@ -125,11 +124,20 @@ public class Depot {
 		return depotLocation;
 	}
 	
-	public static ArrayList<WorkSchedule> getWorkSchedules() {
+	public ArrayList<WorkSchedule> getWorkSchedules() {
 		return workSchedules;
 	}
 	
 	public ArrayList<Driver> getDrivers() {
 		return drivers;
+	}
+
+	public WorkSchedule getWorkSchedule(String clientName) {
+		for (WorkSchedule workSchedule : workSchedules) {
+			if (clientName.equals(workSchedule.client)) {
+				return workSchedule;
+			}
+		}
+		return workSchedule;
 	}
 }

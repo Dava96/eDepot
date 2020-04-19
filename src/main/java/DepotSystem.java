@@ -55,11 +55,11 @@ public class DepotSystem {
 					break;
 				case "2":
 					// Create a work schedule
-					depot.setUpWorkSchedule();
+					depot.createWorkSchedule();
 					break;
 				case "3":
 					// Not sure if needed this is mainly for testing purposes
-					driver.setSchedule();
+					driver.assignSchedule(depot);
 					break;
 				case "4":
 					entryMenu();

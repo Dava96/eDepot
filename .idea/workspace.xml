@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b15a0295-1074-4ed6-9824-314558fbb2e1" name="Default Changelist" comment="Vehicle Inheritence">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Depot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Depot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DepotSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DepotSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/WorkSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WorkSchedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Depot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Depot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DepotSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DepotSystem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Driver$Manager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Driver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Entry.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Entry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Vehicle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Vehicle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/WorkSchedule.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/WorkSchedule.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +35,20 @@
         <option value="Kebeattie" />
       </list>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Attempt-fixing" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/Dava96/eDepot.git" />
+      </set>
+    </option>
   </component>
   <component name="ProjectId" id="1ZMJoWu7j4HVJKABdgTGo8iMj5u" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -55,6 +78,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Entry" />
         <item itemvalue="Application.Entry" />
       </list>
     </recent_temporary>
@@ -91,6 +115,7 @@
       <workItem from="1584744315312" duration="64000" />
       <workItem from="1584744431851" duration="102000" />
       <workItem from="1585043471305" duration="1358000" />
+      <workItem from="1587327820027" duration="3151000" />
     </task>
     <task id="LOCAL-00001" summary="Vehicle Inheritence">
       <created>1585070389635</created>
@@ -99,7 +124,21 @@
       <option name="project" value="LOCAL" />
       <updated>1585070389635</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Vehicle Inheritence">
+      <created>1587242008442</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1587242008442</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fixing WorkSchedule">
+      <created>1587242335287</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587242335287</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,7 +149,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -119,7 +160,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented Logon System" />
     <MESSAGE value="Vehicle Inheritence" />
-    <option name="LAST_COMMIT_MESSAGE" value="Vehicle Inheritence" />
+    <MESSAGE value="Fixing WorkSchedule" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing WorkSchedule" />
   </component>
   <component name="WindowStateProjectService">
     <state x="0" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584644522946">
@@ -130,33 +172,76 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="730" y="222" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584645930533" />
-    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1585070420529">
+    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1587242359115">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585070420529" />
+    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1587242359115" />
+    <state width="427" height="466" key="DebuggerActiveHint" timestamp="1587240269510">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="427" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1587240269510" />
+    <state x="184" y="92" key="DiffContextDialog" timestamp="1587242088199">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="184" y="92" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587242088199" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1584724323878">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584724323878" />
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1585070323200">
+    <state width="938" height="284" key="GridCell.Tab.0.bottom" timestamp="1587330986572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585070323200" />
-    <state width="1877" height="284" key="GridCell.Tab.0.center" timestamp="1585070323200">
+    <state width="938" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587330986572" />
+    <state width="938" height="284" key="GridCell.Tab.0.center" timestamp="1587330986572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585070323200" />
-    <state width="1877" height="284" key="GridCell.Tab.0.left" timestamp="1585070323199">
+    <state width="938" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587330986572" />
+    <state width="938" height="284" key="GridCell.Tab.0.left" timestamp="1587330986572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585070323199" />
-    <state width="1877" height="284" key="GridCell.Tab.0.right" timestamp="1585070323200">
+    <state width="938" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587330986572" />
+    <state width="938" height="284" key="GridCell.Tab.0.right" timestamp="1587330986572">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585070323200" />
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1584744319111">
+    <state width="938" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587330986572" />
+    <state width="938" height="348" key="GridCell.Tab.1.bottom" timestamp="1587330976839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584744319111" />
+    <state width="938" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587330976839" />
+    <state width="938" height="348" key="GridCell.Tab.1.center" timestamp="1587330976839">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587330976839" />
+    <state width="938" height="348" key="GridCell.Tab.1.left" timestamp="1587330976839">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587330976839" />
+    <state width="938" height="348" key="GridCell.Tab.1.right" timestamp="1587330976839">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587330976839" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1587242393330">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587242393330" />
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1587327819790">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587327819790" />
+    <state x="769" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587327833999">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="769" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587327833999" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Driver.java</url>
+          <line>94</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

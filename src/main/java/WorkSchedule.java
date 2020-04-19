@@ -2,7 +2,7 @@ import java.time.LocalDate;
 
 public class WorkSchedule
 {
-	private String client;
+	protected String client;
 	private LocalDate startDate;
 	private LocalDate endDate;
 
