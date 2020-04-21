@@ -1,20 +1,20 @@
 public abstract class Vehicle
 {
-	protected String make, model, regNo;
+	protected String make, model, regNo, depot;
 	protected int weight;
 	protected boolean assigned; // might not be protected
 
-	public Vehicle(String make, String model, int weight, String regNo) {
-		this.make = "Toyota";
-		this.model = "CS23";
-		this.weight = 4090;
-		this.regNo = "454564";
-		this.assigned = false;
+	public Vehicle(String make, String model, int weight, String regNo, String depot) {
+		this.make = make;
+		this.model = model;
+		this.weight = weight;
+		this.regNo = regNo;
+		this.depot = depot;
 	}
 
 	public Vehicle() {
 		//test
-		this("Toyota", "Cs23", 454545, "443456");
+		
 	}
 
 	public boolean isAvaliable() {
@@ -31,5 +31,16 @@ public abstract class Vehicle
 	public String toString() {
 		return make + " " + model + " " + regNo + " " + weight;
 	}
-
+	
+	public void setDepot(String d) {
+		this.depot = d;
+	}
+	
+	public String getRegNo() {
+		return regNo;
+	}
+	
+	public String getDepot() {
+		return depot;
+	}
 }

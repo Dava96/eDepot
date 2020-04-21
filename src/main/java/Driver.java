@@ -94,7 +94,7 @@ public class Driver {
 								driver);
 							depotName.getDriver(driver).setSchedule(depotName.getWorkSchedule(client)); // this needs cleaning up badly
 							//schedule = schedules;
-							//drivers.setAssigned(true);
+							drivers.setAssigned(true);
 							exit = true;
 							break;
 
@@ -112,7 +112,11 @@ public class Driver {
 
 				}
 			}
-		} while (exit = false);
+		} while (exit == false);
+	}
+	
+	public void setAssigned (boolean a) {
+		assigned = a;
 	}
 
 }
