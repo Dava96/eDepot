@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class DepotSystem {
 	private Depot depot;
 	private static boolean isManager;
+	public static final Scanner input = new Scanner(System.in); // This can be accessed from every class Depot.input
 	private Driver driver; // This variable lets the system know if the user is a manager or not, the menu
 							// shown will depend on this
 	private ArrayList<Depot> depots = new ArrayList<Depot>();
@@ -28,7 +29,7 @@ public class DepotSystem {
 			System.out.println("[1] Logon");
 			System.out.println("[2] Quit");
 			System.out.print("Pick: ");
-			choice = Depot.input.nextLine();
+			choice = input.nextLine();
 
 			switch (choice) { // this is the way glyn has it setup in his video, so I've replicated it
 			case "1":
@@ -36,7 +37,7 @@ public class DepotSystem {
 				break;
 			}
 		} while (!choice.equals("2"));
-		Depot.input.close();
+		input.close();
 		System.exit(0);
 	}
 
@@ -52,7 +53,7 @@ public class DepotSystem {
 			do {
 				System.out.printf(
 						"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] Set a work schedule %n[4] View vehicles %n[5] Reassign vehicles %n[6] Exit %n%nSelect your option: ");
-				choice = Depot.input.next();
+				choice = DepotSystem.input.nextLine();
 
 				switch (choice) {
 				case "1":
@@ -63,7 +64,6 @@ public class DepotSystem {
 					depot.createWorkSchedule();
 					break;
 				case "3":
-				
 					driver.assignSchedule(depot);
 					break;
 				case "4":
@@ -82,7 +82,7 @@ public class DepotSystem {
 		} else {
 			do {
 				System.out.printf("%n[1] View your assigned work schedule %n[2] Exit %n%nSelect your option: ");
-				choice = Depot.input.nextLine();
+				choice = input.nextLine();
 
 				switch (choice) {
 				case "1":
@@ -119,9 +119,7 @@ public class DepotSystem {
 		for (Vehicle vehicle : vehicles) {
 			System.out.printf("Make and Model: %s %s Registration: %s Assigned to: %s%n", vehicle.make, vehicle.model,
 					vehicle.regNo, vehicle.depot);
-
 		}
-
 	}
 
 	public void reAssignVehicles() {
@@ -132,17 +130,17 @@ public class DepotSystem {
 
 			listVehicles();
 			System.out.printf("%nSelect the registration number of the vehicle you wish to reassign: %n");
-			vehicleSelection = Depot.input.next();
+			vehicleSelection = DepotSystem.input.next();
 			for (Vehicle vehicle : vehicles) {
 
 				if (vehicleSelection.equals(vehicle.getRegNo())) {
 					System.out.printf("%nYou have selected vehicle: %s%n", vehicleSelection);
 					listDepots();
 					System.out.printf("%nPlease select the depot you want to reassign this vehicle to: %n");
-					depotSelection = Depot.input.next();
+					depotSelection = DepotSystem.input.next();
 					if ((depotSelection.equals("Liverpool") || depotSelection.equals("Leeds")
 							|| depotSelection.equals("Manchester")) && !depotSelection.equals(vehicle.getDepot())) {
-						System.out.printf("%nVehicle %s is now assinged to %s%n", vehicleSelection, depotSelection);
+						System.out.printf("%nVehicle %s is now assigned to %s%n", vehicleSelection, depotSelection);
 						vehicle.setDepot(depotSelection);
 						exit = true;
 						break;

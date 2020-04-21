@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class WorkSchedule
+public class WorkSchedule implements Comparable<WorkSchedule>
 {
 	protected String client;
 	private LocalDate startDate;
@@ -47,11 +47,32 @@ public class WorkSchedule
 
 	@Override
 	public String toString() {
-		return this.client + " " + this.startDate + " " + this.endDate;
+		return String.format("%-10s %-10s %12s", client, startDate, endDate);
 	}
 
 	public String getClient()
 	{
 		return client;
+	}
+
+	public LocalDate getStartDate()
+	{
+		return startDate;
+	}
+
+	public LocalDate getEndDate()
+	{
+		return endDate;
+	}
+
+	public Object getStartDate(WorkSchedule schedule)
+	{
+		return schedule.startDate;
+	}
+
+	@Override
+	public int compareTo(WorkSchedule o)
+	{
+		return 0;
 	}
 }

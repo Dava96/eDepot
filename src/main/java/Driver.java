@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Driver {
 	protected String userName;
@@ -80,39 +78,32 @@ public class Driver {
 		Boolean exit = false;
 
 		do {
+			System.out.printf("%-10s %-10s %10s %n", "Client", "Start Date", "End Date");
 			depotName.listWorkSchedulue();
 			System.out.print("Enter the client name for the schedule you wish to assign: ");
-			client = Depot.input.next();
+			client = DepotSystem.input.next();
+
 			for (WorkSchedule schedules : depotName.getWorkSchedules()) {
 				if (client.equals(schedules.getClient())) {
-					System.out.print("Which driver do you want to assign this to?\n");
 					depotName.listDrivers();
-					driver = Depot.input.next();
+					System.out.print("Which driver do you want to assign this to?\n");
+					driver = DepotSystem.input.next();
 					for (Driver drivers : depotName.getDrivers()) {
 						if (driver.equals(drivers.userName) && !drivers.assigned) {
 							System.out.printf("%nThe work schedule for client %s is now assigned to %s%n ", client,
 								driver);
 							depotName.getDriver(driver).setSchedule(depotName.getWorkSchedule(client)); // this needs cleaning up badly
-							//schedule = schedules;
 							drivers.setAssigned(true);
 							exit = true;
-							break;
 
 						} else {
 							System.out.printf("%nThis driver is either already assigned or does not exist.%n");
-
 						}
-
-
 					}
-
-
-				} else {
-					System.out.printf("%nPlease select a valid client name%n");
-
 				}
-			}
-		} while (exit == false);
+			} if (!client.equals(schedule.getClient()))
+			System.out.printf("%nPlease select a valid client name%n");
+		} while (!exit);
 	}
 	
 	public void setAssigned (boolean a) {

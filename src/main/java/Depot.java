@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Depot {
 	private Vehicle vehicle;
@@ -9,8 +10,6 @@ public class Depot {
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
 	private ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
-	
-	public static final Scanner input = new Scanner(System.in); // This can be accessed from every class Depot.input
 
 	private String depotLocation;
 
@@ -22,9 +21,9 @@ public class Depot {
 		drivers.add(new Driver("Bart", "Shortsshort1", false, false));
 
 		workSchedules.add(new WorkSchedule("Bob", LocalDate.parse("2020-05-05"), LocalDate.parse("2020-05-06")));
-		
-		
-		
+		workSchedules.add(new WorkSchedule("Gary", LocalDate.parse("2020-04-25"), LocalDate.parse("2020-04-27")));
+		sortWorkSchedule();
+
 		System.out.println(drivers.toString());
 	}
 
@@ -33,10 +32,10 @@ public class Depot {
 		String pWord;
 		do {
 			System.out.println("Please enter your username: ");
-			uName = input.nextLine();
+			uName = DepotSystem.input.nextLine();
 
 			System.out.println("Please enter your password: ");
-			pWord = input.nextLine();
+			pWord = DepotSystem.input.nextLine();
 
 		} while (!authenticate(uName.trim(), pWord.trim()));
 		return getDriver(uName);
@@ -77,17 +76,17 @@ public class Depot {
 		do { // Loop is necessary to allow re entry of data should any erroneous dates be
 				// inputed
 			System.out.print("Please enter a client name: ");
-			String client = input.next();
+			String client = DepotSystem.input.next();
 
-			System.out.print("Please enter a start date (yyyy-mm-dd): ");
-			String startDate = input.next();
+			System.out.print("Please enter a start date [i.e 2020-05-15]: ");
+			String startDate = DepotSystem.input.next();
 
-			System.out.print("Please enter an end date (yyyy-mm-dd): ");
-			String endDate = input.next();
+			System.out.print("Please enter an end date [i.e 2020-05-17]: ");
+			String endDate = DepotSystem.input.next();
 			try {
 				// Try and create an object of the work schedule class with the user defined
 				// parameters
-				WorkSchedule schedule = new WorkSchedule(client, LocalDate.parse(startDate), LocalDate.parse(endDate));
+				WorkSchedule schedule = new WorkSchedule(client, LocalDate.parse(startDate), LocalDate.parse(endDate)); // try to make this so it is the date format of D-MMM-YY
 				workSchedules.add(schedule);
 				System.out.printf("%nWork schedule successfully created %n%n");
 				break;
@@ -116,8 +115,8 @@ public class Depot {
 	}
 
 	public void listWorkSchedulue() {
-		for (int i = 0; i < workSchedules.size(); i++) {
-			System.out.println(workSchedules.toString());
+		for (WorkSchedule workSchedule : workSchedules) {
+			System.out.println(workSchedule.toString());
 			// this is just a test to see if it works, it's probably not needed
 		}
 	}
@@ -131,6 +130,10 @@ public class Depot {
 	
 	public ArrayList<WorkSchedule> getWorkSchedules() {
 		return workSchedules;
+	}
+
+	public void sortWorkSchedule() {
+		workSchedules.sort(Comparator.comparing(WorkSchedule::getStartDate));
 	}
 	
 	public ArrayList<Driver> getDrivers() {
