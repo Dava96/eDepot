@@ -9,6 +9,7 @@ public class Depot {
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
 	private ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
+	
 	public static final Scanner input = new Scanner(System.in); // This can be accessed from every class Depot.input
 
 	private String depotLocation;
@@ -21,6 +22,8 @@ public class Depot {
 		drivers.add(new Driver("Bart", "Shortsshort1", false, false));
 
 		workSchedules.add(new WorkSchedule("Bob", LocalDate.parse("2020-05-05"), LocalDate.parse("2020-05-06")));
+		
+		
 		
 		System.out.println(drivers.toString());
 	}
@@ -118,6 +121,8 @@ public class Depot {
 			// this is just a test to see if it works, it's probably not needed
 		}
 	}
+	
+	
 
 	@Override
 	public String toString() {
