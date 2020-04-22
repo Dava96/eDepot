@@ -72,37 +72,41 @@ public class Driver {
 	}
 
 	public void assignSchedule(Depot depotName) throws Exception {
-		String client;
-		String driver;
-		WorkSchedule workSchedule;
-		Boolean exit = false;
+		String client, driver;
+		Boolean exit = false, validClient = false;
 
 		do {
 			System.out.printf("%-10s %-10s %10s %n", "Client", "Start Date", "End Date");
 			depotName.listWorkSchedulue();
 			System.out.print("Enter the client name for the schedule you wish to assign: ");
-			client = DepotSystem.input.next();
+			client = DepotSystem.input.nextLine();
 
-			for (WorkSchedule schedules : depotName.getWorkSchedules()) {
-				if (client.equals(schedules.getClient())) {
+			for (WorkSchedule ws : depotName.getWorkSchedules()) {
+				if (client.equals(ws.getClient())) {
+					validClient = true;
+					System.out.printf("%n%20s%n", "Drivers");
 					depotName.listDrivers();
-					System.out.print("Which driver do you want to assign this to?\n");
-					driver = DepotSystem.input.next();
+					System.out.print("Which Driver do you want to assign this to: ");
+					driver = DepotSystem.input.nextLine();
+
 					for (Driver drivers : depotName.getDrivers()) {
 						if (driver.equals(drivers.userName) && !drivers.assigned) {
 							System.out.printf("%nThe work schedule for client %s is now assigned to %s%n ", client,
 								driver);
-							depotName.getDriver(driver).setSchedule(depotName.getWorkSchedule(client)); // this needs cleaning up badly
+							depotName.getDriver(driver).setSchedule(depotName.getWorkSchedule(client));
 							drivers.setAssigned(true);
 							exit = true;
-
-						} else {
-							System.out.printf("%nThis driver is either already assigned or does not exist.%n");
+						} else if ((!driver.equals(drivers.userName) && drivers.assigned)) {
+							System.out.printf("%nEither not a valid driver or Driver is already assigned a Job.%n");
 						}
 					}
+				} else {
+					validClient = false;
 				}
-			} if (!client.equals(schedule.getClient()))
-			System.out.printf("%nPlease select a valid client name%n");
+			}
+			if (!validClient) {
+				System.out.printf("%nPlease enter a valid client.%n");
+			}
 		} while (!exit);
 	}
 	
@@ -110,4 +114,8 @@ public class Driver {
 		assigned = a;
 	}
 
+	public String getUserName()
+	{
+		return userName;
+	}
 }

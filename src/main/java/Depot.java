@@ -45,7 +45,6 @@ public class Depot {
 		for (Driver driver : drivers) {
 			if (uName.equals(driver.userName) && pWord.equals(driver.passWord)) {
 				System.out.printf("%nWelcome back %s%n", uName);
-				DepotSystem.setIsManager(driver.getIsManager());
 				return true;
 			}
 		}
@@ -68,7 +67,7 @@ public class Depot {
 				return driver;
 			}
 		}
-		return driver;
+		return null;
 	}
 
 	public void createWorkSchedule() {
@@ -120,8 +119,6 @@ public class Depot {
 			// this is just a test to see if it works, it's probably not needed
 		}
 	}
-	
-	
 
 	@Override
 	public String toString() {
@@ -146,6 +143,6 @@ public class Depot {
 				return workSchedule;
 			}
 		}
-		return workSchedule;
+		return null;
 	}
 }

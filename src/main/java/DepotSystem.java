@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class DepotSystem {
 	private Depot depot;
-	private static boolean isManager;
+	private boolean isManager;
 	public static final Scanner input = new Scanner(System.in); // This can be accessed from every class Depot.input
 	private Driver driver; // This variable lets the system know if the user is a manager or not, the menu
 							// shown will depend on this
@@ -49,12 +49,11 @@ public class DepotSystem {
 			break;
 		}
 
-		if (isManager) {
+		if (driver.getIsManager()) {
 			do {
 				System.out.printf(
 						"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] Set a work schedule %n[4] View vehicles %n[5] Reassign vehicles %n[6] Exit %n%nSelect your option: ");
 				choice = DepotSystem.input.nextLine();
-
 				switch (choice) {
 				case "1":
 					System.out.println(driver.getSchedule());
@@ -104,7 +103,7 @@ public class DepotSystem {
 		depot = new Depot(s);
 	}
 
-	public static void setIsManager(boolean b) {
+	public void setIsManager(boolean b) {
 		isManager = b;
 	}
 
@@ -158,7 +157,7 @@ public class DepotSystem {
 
 			}
 
-		} while (exit == false);
+		} while (!exit);
 
 	}
 }
