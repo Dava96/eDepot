@@ -121,8 +121,9 @@ public class DepotSystem {
 	}
 
 	public void listVehicles() {
+		System.out.printf("%-10s %-10s %-12s %6s %n", "Make", "Model", "Registration", "Depot");
 		for (Vehicle vehicle : vehicles) {
-			System.out.printf("Make and Model: %s %s Registration: %s Assigned to: %s%n", vehicle.make, vehicle.model,
+			System.out.printf("%-10s %-10s %-10s %12s %n", vehicle.make, vehicle.model,
 					vehicle.regNo, vehicle.depot);
 		}
 	}
@@ -130,7 +131,7 @@ public class DepotSystem {
 	public void reAssignVehicles() {
 		String vehicleSelection;
 		String depotSelection;
-		boolean exit = false;
+		boolean exit = false, validReg = false;
 		do {
 
 			listVehicles();
@@ -139,6 +140,7 @@ public class DepotSystem {
 			for (Vehicle vehicle : vehicles) {
 
 				if (vehicleSelection.equals(vehicle.getRegNo())) {
+					validReg = true;
 					System.out.printf("%nYou have selected vehicle: %s%n", vehicleSelection);
 					listDepots();
 					System.out.printf("%nPlease select the depot you want to reassign this vehicle to: %n");
@@ -153,14 +155,14 @@ public class DepotSystem {
 					} else {
 						System.out.printf(
 								"%nThe vehicle is either already assigned to the depot, or the depot does not exist%n%n");
-
 					}
 
 				} else {
-					System.out.printf("Please select a valid registration%n%n");
-
+				validReg = false;
 				}
 
+			} if (!validReg) {
+				System.out.printf("Please select a valid registration%n%n");
 			}
 
 		} while (!exit);

@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class Depot {
@@ -86,18 +85,7 @@ public class Depot {
 			try {
 				// Try and create an object of the work schedule class with the user defined
 				// parameters
-				WorkSchedule schedule = new WorkSchedule(client, LocalDate.parse(startDate), LocalDate.parse(endDate)); // try
-																														// to
-																														// make
-																														// this
-																														// so
-																														// it
-																														// is
-																														// the
-																														// date
-																														// format
-																														// of
-																														// D-MMM-YY
+				WorkSchedule schedule = new WorkSchedule(client, LocalDate.parse(startDate), LocalDate.parse(endDate));
 				workSchedules.add(schedule);
 				System.out.printf("%nWork schedule successfully created %n%n");
 				break;
@@ -148,10 +136,6 @@ public class Depot {
 				System.out.printf("%nThere are currently no active work schedules%n");
 			}
 		} while(found == false);
-	
-		
-		
-
 	}
 
 	public void listVehicles() {
@@ -168,6 +152,7 @@ public class Depot {
 	}
 
 	public void listWorkSchedulue() {
+		System.out.printf("%-10s %-10s %10s %n", "Client", "Start Date", "End Date");
 		for (WorkSchedule workSchedule : workSchedules) {
 			System.out.println(workSchedule.toString());
 
@@ -175,6 +160,7 @@ public class Depot {
 	}
 
 	public void listCompletedWorkSchedulue() {
+		System.out.printf("%-10s %-10s %10s %n", "Client", "Start Date", "End Date");
 		for (WorkSchedule workSchedule : completedWorkSchedules) {
 			System.out.println(workSchedule.toString());
 

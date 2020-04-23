@@ -73,11 +73,10 @@ public class Driver {
 
 	public void assignSchedule(Depot depotName) throws Exception {
 		String client, driver;
-		Boolean exit = false, validClient = false;
+		Boolean exit = false, validClient = false, validDriver = false;
 		
 		if(depotName.getWorkSchedules().size() != 0) {
 			do {
-				System.out.printf("%-10s %-10s %10s %n", "Client", "Start Date", "End Date");
 				depotName.listWorkSchedulue();
 				System.out.print("Enter the client name for the schedule you wish to assign: ");
 				client = DepotSystem.input.nextLine();
@@ -92,13 +91,14 @@ public class Driver {
 
 						for (Driver drivers : depotName.getDrivers()) {
 							if (driver.equals(drivers.userName) && !drivers.assigned) {
+								validDriver = true;
 								System.out.printf("%nThe work schedule for client %s is now assigned to %s%n ", client,
 									driver);
 								depotName.getDriver(driver).setSchedule(depotName.getWorkSchedule(client));
 								drivers.setAssigned(true);
 								exit = true;
-							} else if ((!driver.equals(drivers.userName) && drivers.assigned)) {
-								System.out.printf("%nEither not a valid driver or Driver is already assigned a Job.%n");
+							} else {
+								validDriver = false;
 							}
 						}
 					} else {
@@ -107,6 +107,8 @@ public class Driver {
 				}
 				if (!validClient) {
 					System.out.printf("%nPlease enter a valid client.%n");
+				} else if (!validDriver) {
+					System.out.printf("%nEither not a valid driver or Driver is already assigned a Job.%n");
 				}
 			} while (!exit);
 		}
