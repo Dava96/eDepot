@@ -52,7 +52,7 @@ public class DepotSystem {
 		if (driver.getIsManager()) {
 			do {
 				System.out.printf(
-						"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] Set a work schedule %n[4] View vehicles %n[5] Reassign vehicles %n[6] Exit %n%nSelect your option: ");
+						"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] Set a work schedule %n[4] View vehicles %n[5] Reassign vehicles %n[6] Set a work schedule as complete %n[7] View archived work schedules %n[8] Exit %n%nSelect your option: ");
 				choice = DepotSystem.input.nextLine();
 				switch (choice) {
 				case "1":
@@ -72,6 +72,12 @@ public class DepotSystem {
 					reAssignVehicles();
 					break;
 				case "6":
+					depot.completeWorkSchedule();
+					break;
+				case "7":
+					depot.listCompletedWorkSchedulue();
+					break;
+				case "8":
 					entryMenu();
 					break;
 				// exit the system

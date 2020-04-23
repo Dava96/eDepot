@@ -10,6 +10,7 @@ public class Depot {
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
 	private ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
+	private ArrayList<WorkSchedule> completedWorkSchedules = new ArrayList<WorkSchedule>();
 
 	private String depotLocation;
 
@@ -85,7 +86,18 @@ public class Depot {
 			try {
 				// Try and create an object of the work schedule class with the user defined
 				// parameters
-				WorkSchedule schedule = new WorkSchedule(client, LocalDate.parse(startDate), LocalDate.parse(endDate)); // try to make this so it is the date format of D-MMM-YY
+				WorkSchedule schedule = new WorkSchedule(client, LocalDate.parse(startDate), LocalDate.parse(endDate)); // try
+																														// to
+																														// make
+																														// this
+																														// so
+																														// it
+																														// is
+																														// the
+																														// date
+																														// format
+																														// of
+																														// D-MMM-YY
 				workSchedules.add(schedule);
 				System.out.printf("%nWork schedule successfully created %n%n");
 				break;
@@ -97,6 +109,48 @@ public class Depot {
 
 			}
 		} while (true);
+
+	}
+
+	public void completeWorkSchedule() throws Exception {
+		boolean found = false;
+		do {
+			if(workSchedules.size()!=0) {
+				listWorkSchedulue();
+				System.out.printf("%nEnter the name of the client's schedue you wish to set as complete: ");
+				String choice = DepotSystem.input.next();
+				WorkSchedule completedSchedule = new WorkSchedule("", LocalDate.parse("2020-05-07"),
+						LocalDate.parse("2020-05-08"));
+				
+				for (WorkSchedule schedule : workSchedules) {
+					if (choice.equals(schedule.client)) {
+						completedSchedule = schedule;
+						found = true;
+					}
+				}
+				if (found == true) {
+					completedWorkSchedules.add(completedSchedule);
+					workSchedules.remove(completedSchedule);
+					for (Driver driver : drivers) {
+						if (driver.getSchedule() != null) {
+							WorkSchedule ws = driver.getSchedule();
+							String client = ws.getClient();
+							if (client.equals(completedSchedule.getClient())) {
+								driver.setSchedule(null);
+								driver.setAssigned(false);
+							}
+						}
+
+					}
+
+				}
+			} else {
+				System.out.printf("%nThere are currently no active work schedules%n");
+			}
+		} while(found == false);
+	
+		
+		
 
 	}
 
@@ -116,7 +170,14 @@ public class Depot {
 	public void listWorkSchedulue() {
 		for (WorkSchedule workSchedule : workSchedules) {
 			System.out.println(workSchedule.toString());
-			// this is just a test to see if it works, it's probably not needed
+
+		}
+	}
+
+	public void listCompletedWorkSchedulue() {
+		for (WorkSchedule workSchedule : completedWorkSchedules) {
+			System.out.println(workSchedule.toString());
+
 		}
 	}
 
@@ -124,7 +185,7 @@ public class Depot {
 	public String toString() {
 		return depotLocation;
 	}
-	
+
 	public ArrayList<WorkSchedule> getWorkSchedules() {
 		return workSchedules;
 	}
@@ -132,7 +193,7 @@ public class Depot {
 	public void sortWorkSchedule() {
 		workSchedules.sort(Comparator.comparing(WorkSchedule::getStartDate));
 	}
-	
+
 	public ArrayList<Driver> getDrivers() {
 		return drivers;
 	}
