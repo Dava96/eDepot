@@ -74,40 +74,46 @@ public class Driver {
 	public void assignSchedule(Depot depotName) throws Exception {
 		String client, driver;
 		Boolean exit = false, validClient = false;
+		
+		if(depotName.getWorkSchedules().size() != 0) {
+			do {
+				System.out.printf("%-10s %-10s %10s %n", "Client", "Start Date", "End Date");
+				depotName.listWorkSchedulue();
+				System.out.print("Enter the client name for the schedule you wish to assign: ");
+				client = DepotSystem.input.nextLine();
 
-		do {
-			System.out.printf("%-10s %-10s %10s %n", "Client", "Start Date", "End Date");
-			depotName.listWorkSchedulue();
-			System.out.print("Enter the client name for the schedule you wish to assign: ");
-			client = DepotSystem.input.nextLine();
+				for (WorkSchedule ws : depotName.getWorkSchedules()) {
+					if (client.equals(ws.getClient())) {
+						validClient = true;
+						System.out.printf("%n%20s%n", "Drivers");
+						depotName.listDrivers();
+						System.out.print("Which Driver do you want to assign this to: ");
+						driver = DepotSystem.input.nextLine();
 
-			for (WorkSchedule ws : depotName.getWorkSchedules()) {
-				if (client.equals(ws.getClient())) {
-					validClient = true;
-					System.out.printf("%n%20s%n", "Drivers");
-					depotName.listDrivers();
-					System.out.print("Which Driver do you want to assign this to: ");
-					driver = DepotSystem.input.nextLine();
-
-					for (Driver drivers : depotName.getDrivers()) {
-						if (driver.equals(drivers.userName) && !drivers.assigned) {
-							System.out.printf("%nThe work schedule for client %s is now assigned to %s%n ", client,
-								driver);
-							depotName.getDriver(driver).setSchedule(depotName.getWorkSchedule(client));
-							drivers.setAssigned(true);
-							exit = true;
-						} else if ((!driver.equals(drivers.userName) && drivers.assigned)) {
-							System.out.printf("%nEither not a valid driver or Driver is already assigned a Job.%n");
+						for (Driver drivers : depotName.getDrivers()) {
+							if (driver.equals(drivers.userName) && !drivers.assigned) {
+								System.out.printf("%nThe work schedule for client %s is now assigned to %s%n ", client,
+									driver);
+								depotName.getDriver(driver).setSchedule(depotName.getWorkSchedule(client));
+								drivers.setAssigned(true);
+								exit = true;
+							} else if ((!driver.equals(drivers.userName) && drivers.assigned)) {
+								System.out.printf("%nEither not a valid driver or Driver is already assigned a Job.%n");
+							}
 						}
+					} else {
+						validClient = false;
 					}
-				} else {
-					validClient = false;
 				}
-			}
-			if (!validClient) {
-				System.out.printf("%nPlease enter a valid client.%n");
-			}
-		} while (!exit);
+				if (!validClient) {
+					System.out.printf("%nPlease enter a valid client.%n");
+				}
+			} while (!exit);
+		}
+		else {
+			System.out.printf("%nThere are currently no unassinged work schedules%n");
+		}
+		
 	}
 	
 	public void setAssigned (boolean a) {
