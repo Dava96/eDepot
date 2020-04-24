@@ -23,7 +23,7 @@ public class WorkSchedule implements Comparable<WorkSchedule>, Serializable
 
 
 	public void setStartDate(LocalDate startDate) throws Exception {
-		if (startDate.isAfter(LocalDate.now())) {
+		if (startDate.isAfter(LocalDate.now())) { // checks to see if the date inputted is after todays date.
 			this.startDate = startDate;
 		}
 		else {
@@ -33,7 +33,7 @@ public class WorkSchedule implements Comparable<WorkSchedule>, Serializable
 
 	public void setEndDate(LocalDate endDate) throws Exception {
 		if (endDate.isAfter(LocalDate.now().plusDays(1)) && endDate.isBefore(startDate.plusDays(4))) {
-			this.endDate = endDate; // i think the spec said it had to be delivered in 72 hours, so this checks for that
+			this.endDate = endDate; // Checks if the date is 72 hours within todays date.
 		}
 		else {
 			throw new Exception("Attempt to set the end date (" + endDate.toString() + " which is too far in the future)");

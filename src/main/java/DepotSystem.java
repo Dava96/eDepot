@@ -2,12 +2,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class DepotSystem implements Serializable
+public class DepotSystem
 {
 	private Depot depot;
 
@@ -34,10 +33,10 @@ public class DepotSystem implements Serializable
 
 	public void entryMenu() throws Exception
 	{
-		String choice = "";
+		String choice;
 		do
 		{
-			System.out.println("TODO CREATE VEHICLES, SAVING AND COMMENTING AND DOCUMENTS, OURS LOOKS REALLY BAD COMPARED TO GLYNS BECAUSE HALF OF OUR CODE IS IN THE WRONG PLACE");
+			System.out.println("SAVING AND COMMENTING AND DOCUMENTS, OURS LOOKS REALLY BAD COMPARED TO GLYNS BECAUSE HALF OF OUR CODE IS IN THE WRONG PLACE ");
 			System.out.println("Entry Menu");
 			System.out.println("[1] Logon");
 			System.out.println("[2] Quit");
@@ -45,7 +44,7 @@ public class DepotSystem implements Serializable
 			choice = input.nextLine();
 
 			switch (choice)
-			{ // this is the way glyn has it setup in his video, so I've replicated it
+			{
 				case "1":
 					run();
 					break;
@@ -59,7 +58,6 @@ public class DepotSystem implements Serializable
 	private void run() throws Exception
 	{
 		String choice;
-		String userName;
 		while (true)
 		{
 			driver = depot.logOn();
@@ -72,7 +70,8 @@ public class DepotSystem implements Serializable
 			{
 				System.out.printf(
 					"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] Set a work schedule %n[4] View vehicles %n" +
-						"[5] Reassign vehicles %n[6] Set a work schedule as complete %n[7] View archived work schedules %n[8] Create Driver NEEDS FIXING %n[9] Exit%n%nSelect your option: ");
+						"[5] Reassign vehicles %n[6] Set a work schedule as complete %n[7] View archived work schedules %n[8] Create Driver NEEDS FIXING " +
+						"%n[9] Create Vehicle %n[10] Exit%n%nSelect your option: ");
 				choice = DepotSystem.input.nextLine();
 				switch (choice)
 				{
@@ -99,9 +98,12 @@ public class DepotSystem implements Serializable
 						depot.listCompletedWorkSchedulue();
 						break;
 					case "8":
-						createDriver(); // DOESN'T WORK BECAUSE all the drivers are created in depot and not in the DepotSystem password method causes it to break
+						createDriver(); // DOESN'T WORK BECAUSE all the drivers are created in depot and not in the DepotSystem & password method causes it to break
 						break;
 					case "9":
+						createVehicle();
+						break;
+					case "10":
 						entryMenu();
 						break;
 					// exit the system
@@ -151,11 +153,11 @@ public class DepotSystem implements Serializable
 
 	public void listVehicles()
 	{
-		System.out.printf("%-10s %-10s %-12s %6s %n", "Make", "Model", "Registration", "Depot");
+		System.out.printf("%-10s %-10s %-12s %6s %10s%n", "Make", "Model", "Registration", "Depot", "Type"); // Used to format the print in a table like structure
 		for (Vehicle vehicle : vehicles)
 		{
-			System.out.printf("%-10s %-10s %-10s %12s %n", vehicle.make, vehicle.model,
-				vehicle.regNo, vehicle.depot);
+			System.out.printf("%-10s %-10s %-10s %12s %8s %n", vehicle.make, vehicle.model,
+				vehicle.regNo, vehicle.depot, vehicle.getClass().getName());
 		}
 	}
 
@@ -207,6 +209,89 @@ public class DepotSystem implements Serializable
 			}
 
 		} while (!exit);
+	}
+
+	public void createVehicle()
+	{
+		String vMake, vModel = "", vRegNo = "", vDepo = "", yesNo, liquidType = "";
+		int weight = 0, capacity = 0;
+		Depot depotLocation = null;
+		boolean isTruck = false, isTanker = false, exit = false, validLocation = true, duplicateReg = true;
+		do
+		{
+			System.out.printf("%nEnter the Vehicles Make i.e [Toyota] : ");
+			vMake = DepotSystem.input.nextLine().trim();
+			if (!vMake.matches(".*\\d.*")) { // This prevents the user from entering numbers as a name.
+
+				System.out.printf("%nEnter the Vehicles Model i.e [DS-12]: ");
+				vModel = DepotSystem.input.nextLine().trim().toUpperCase();
+
+				System.out.printf("%nEnter the Vehicles RegNo: i.e [UT19PAL]: ");
+				vRegNo = DepotSystem.input.nextLine().toUpperCase();
+
+				try {
+					System.out.printf("%nEnter the Vehicles capacity: i.e [2500]: ");
+					capacity = Integer.parseInt(DepotSystem.input.nextLine()); // I have parsed a int from a string because using nextInt alone was causing errors later in the method.
+
+					System.out.printf("%nEnter the Vehicles weight: i.e [12000]: ");
+					weight = Integer.parseInt(DepotSystem.input.nextLine());
+
+				} catch (NumberFormatException e) {
+					System.out.println("Please Enter a valid number.");
+					//e.printStackTrace(); // debugging code
+					break;
+				}
+
+				for (Vehicle v : vehicles) {
+					if (vRegNo.equals(v.getRegNo())) {
+						duplicateReg = false;
+					}
+				}	if (!duplicateReg) { // If the registration is duplicate, print this line
+					System.out.println("You have Entered a duplicate Registration number");
+					break;
+				}
+				System.out.printf("%nIs the vehicle a Truck or Tanker: ");
+				yesNo = DepotSystem.input.nextLine().toLowerCase();
+				if (yesNo.equals("truck")) {
+					isTruck = true;
+				} if (yesNo.equals("tanker")) {
+					isTanker = true;
+					System.out.printf("%nEnter the Liquid type i.e [Oil]: ");
+					liquidType = DepotSystem.input.nextLine();
+				} else if (!yesNo.equals("truck")) { // else if it doesn't equal truck it can't equal tanker either.
+					System.out.println("Enter a valid vehicle type, either truck or tanker.");
+					break;
+				}
+
+				System.out.printf("%nDepots%n%n");
+				listDepots();
+				System.out.printf("%nEnter the depots Location: ");
+				vDepo = DepotSystem.input.nextLine();
+				for (Depot depot : depots)
+				{
+					if (vDepo.equals(depot.getDepotLocation())) // checks if the depot location that the user entered exists
+					{
+						validLocation = true;
+						//depotLocation = getDepot(vDepo); assingment of depot Object
+						exit = true;
+						break;
+					} else {
+						validLocation = false;
+					}
+				}
+			} else {
+				System.out.println("Please Enter a name without Numbers.");
+			}
+			if (!validLocation) {
+				System.out.println("Please Enter a valid location.");
+			}
+			if (isTanker) {
+				vehicles.add(new Tanker(vMake, vModel, weight, vRegNo, vDepo, capacity, liquidType));
+			} if (isTruck) {
+			vehicles.add(new Truck(vMake, vModel, weight, vRegNo, vDepo, capacity));
+		}
+		} while (!exit);
+
 	}
 
 	public void createDriver()
@@ -261,6 +346,15 @@ public class DepotSystem implements Serializable
 		for (Depot depot : depots) {
 			if (location.equals(depot.getDepotLocation())) {
 				return depot;
+			}
+		}
+		return null;
+	}
+
+	public Vehicle getVehicleReg(String regNo) {
+		for (Vehicle v : vehicles) {
+			if (regNo.equals(v.regNo)) {
+				return v;
 			}
 		}
 		return null;
