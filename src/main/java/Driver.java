@@ -1,5 +1,7 @@
+import java.io.Serializable;
 
-public class Driver {
+public class Driver implements Serializable
+{
 	protected String userName;
 	protected String passWord;
 	private boolean assigned; // not sure if this is private or protected yet
@@ -49,8 +51,9 @@ public class Driver {
 		return false; // returns false if assigned = true
 	}
 
+	@Override
 	public String toString() {
-		return String.format("%s %s %s %s", userName, passWord, assigned, isManager);
+		return String.format("%s", userName);
 	}
 	
 	public boolean getIsManager() {
@@ -63,7 +66,7 @@ public class Driver {
 
 	}
 
-	public WorkSchedule getSchedule() throws Exception {
+	public WorkSchedule getSchedule() {
 		return schedule;
 	}
 
@@ -92,15 +95,18 @@ public class Driver {
 						for (Driver drivers : depotName.getDrivers()) {
 							if (driver.equals(drivers.userName) && !drivers.assigned) {
 								validDriver = true;
-								System.out.printf("%nThe work schedule for client %s is now assigned to %s%n ", client,
+								System.out.printf("%nThe work schedule for client %s is now assigned to %s.%n ", client,
 									driver);
 								depotName.getDriver(driver).setSchedule(depotName.getWorkSchedule(client));
 								drivers.setAssigned(true);
+								ws.setDriverAssigned(depotName.getDriver(driver));
 								exit = true;
-							} else {
+								break;
+							} else if ((!driver.equals(drivers.userName) && drivers.assigned)) {
 								validDriver = false;
 							}
 						}
+						break;
 					} else {
 						validClient = false;
 					}

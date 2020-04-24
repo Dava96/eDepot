@@ -1,9 +1,15 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DepotSystem {
 	private Depot depot;
 	private boolean isManager;
+
+	private static final String PATH = "C:\\Users\\David\\IdeaProjects\\eDepot\\src\\main\\java";
 	public static final Scanner input = new Scanner(System.in); // This can be accessed from every class Depot.input
 	private Driver driver; // This variable lets the system know if the user is a manager or not, the menu
 							// shown will depend on this
@@ -11,6 +17,7 @@ public class DepotSystem {
 	private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
 
 	public DepotSystem() throws Exception {
+		deSerialize();
 		setDepot("Liverpool");
 		depots.add(new Depot("Liverpool"));
 		depots.add(new Depot("Manchester"));
@@ -38,6 +45,7 @@ public class DepotSystem {
 			}
 		} while (!choice.equals("2"));
 		input.close();
+		serialize();
 		System.exit(0);
 	}
 
@@ -153,8 +161,7 @@ public class DepotSystem {
 						break;
 
 					} else {
-						System.out.printf(
-								"%nThe vehicle is either already assigned to the depot, or the depot does not exist%n%n");
+						System.out.printf("%nThe vehicle is either already assigned to the depot, or the depot does not exist%n%n");
 					}
 
 				} else {
@@ -166,6 +173,31 @@ public class DepotSystem {
 			}
 
 		} while (!exit);
+	}
 
+	private void serialize() {
+		ObjectOutputStream oos;
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream(PATH + "depots.ser"));
+			oos.writeObject(depots);
+			oos.close();
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	private void deSerialize() {
+		ObjectInputStream ois;
+
+		try {
+			ois = new ObjectInputStream(new FileInputStream(PATH + "depots.ser"));
+
+			depots = (ArrayList<Depot>)ois.readObject(); // this error is normal don't try fix it
+			ois.close();
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

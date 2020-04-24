@@ -1,15 +1,18 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class WorkSchedule implements Comparable<WorkSchedule>
+public class WorkSchedule implements Comparable<WorkSchedule>, Serializable
 {
 	protected String client;
 	private LocalDate startDate;
 	private LocalDate endDate;
+	private Driver driverAssigned;
 
 	public WorkSchedule(String client, LocalDate startDate, LocalDate endDate) throws Exception {
 		this.client = client;
 		setStartDate(startDate);
 		setEndDate(endDate);
+		this.driverAssigned = null;
 	}
 
 	public WorkSchedule(String client) throws Exception {
@@ -47,7 +50,15 @@ public class WorkSchedule implements Comparable<WorkSchedule>
 
 	@Override
 	public String toString() {
-		return String.format("%-10s %-10s %12s", client, startDate, endDate);
+		return String.format("%-10s %-10s %12s %8s", client, startDate, endDate, driverAssigned);
+	}
+
+	public void setDriverAssigned(Driver driver) {
+		this.driverAssigned = driver;
+	}
+
+	public Driver getDriverAssigned() {
+		return driverAssigned;
 	}
 
 	public String getClient()
