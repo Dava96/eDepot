@@ -20,7 +20,7 @@ public class DepotSystem
 {
 	private Depot depot;
 
-	private final String PATH = "C:\\Users\\David\\IdeaProjects\\eDepot\\src\\main\\java\\";
+	private final String PATH = "C:\\Users\\David\\IdeaProjects\\eDepot\\src\\main\\java\\"; // Directory will need to be changed in order for the program to read from the file
 	public final Scanner input = new Scanner(System.in); // This can be accessed from every class Depot.input
 	private Driver driver; // This variable lets the system know if the user is a manager or not, the menu
 	// shown will depend on this
@@ -78,7 +78,6 @@ public class DepotSystem
 		String choice;
 		do
 		{
-			System.out.println("TO DO Testing, bug fixing?");
 			System.out.println("Entry Menu");
 			System.out.println("[1] Logon");
 			System.out.println("[2] Quit");
@@ -110,7 +109,6 @@ public class DepotSystem
 
 			System.out.println("Please enter your password: ");
 			pWord = input.nextLine();
-			// The Last depot never works for some reason?
 			for (depotNo = 0; depotNo < depots.size(); depotNo++) {
 				depot = depots.get(depotNo); // Assigns the depot number to depot
 				if (depot.authenticate(uName.trim(), pWord.trim())) { // users the assigned depot to check if there is an existing account
@@ -146,7 +144,7 @@ public class DepotSystem
 			{
 				System.out.printf(
 					"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] Set a work schedule %n[4] View vehicles %n" +
-						"[5] Reassign vehicles %n[6] Set a work schedule as complete %n[7] View archived work schedules %n[8] Create Driver NEEDS FIXING " +
+						"[5] Reassign vehicles %n[6] Set a work schedule as complete %n[7] View archived work schedules %n[8] Create Driver" +
 						"%n[9] Create Vehicle %n[10] Exit%n%nSelect your option: ");
 				choice = input.nextLine();
 				switch (choice)
@@ -174,7 +172,7 @@ public class DepotSystem
 						depots.get(depotNo).listCompletedWorkSchedulue();
 						break;
 					case "8":
-						createDriver(); // DOESN'T WORK BECAUSE all the drivers are created in depot and not in the DepotSystem & password method causes it to break
+						createDriver();
 						break;
 					case "9":
 						createVehicle();
@@ -458,7 +456,7 @@ public class DepotSystem
 				}
 				if (!validReg) //To prompt user to enter correct information
 				{
-					System.out.printf("Please select a valid registration%n%n"); // prints when its not supposed to
+					System.out.printf("Please select a valid registration%n%n");
 				}
 				if (!validLocation)
 				{
