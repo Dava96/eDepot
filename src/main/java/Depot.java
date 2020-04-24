@@ -1,7 +1,9 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class Depot implements Serializable
 {
@@ -10,8 +12,8 @@ public class Depot implements Serializable
 	private Driver driver;
 	private ArrayList<Driver> drivers = new ArrayList<Driver>();
 	private WorkSchedule workSchedule;
-	private ArrayList<WorkSchedule> workSchedules = new ArrayList<WorkSchedule>();
-	private ArrayList<WorkSchedule> completedWorkSchedules = new ArrayList<WorkSchedule>();
+	private List<WorkSchedule> workSchedules = Collections.synchronizedList(new ArrayList<WorkSchedule>());
+	private List<WorkSchedule> completedWorkSchedules = Collections.synchronizedList(new ArrayList<WorkSchedule>());
 
 	private String depotLocation;
 
@@ -177,7 +179,7 @@ public class Depot implements Serializable
 		return depotLocation;
 	}
 
-	public ArrayList<WorkSchedule> getWorkSchedules() {
+	public List<WorkSchedule> getWorkSchedules() {
 		return workSchedules;
 	}
 

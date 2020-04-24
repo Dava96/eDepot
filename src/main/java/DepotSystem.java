@@ -4,19 +4,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
-public class DepotSystem  implements Serializable
+public class DepotSystem implements Serializable
 {
 	private Depot depot;
-	private boolean isManager;
 
-	private static final String PATH = "C:\\Users\\David\\IdeaProjects\\eDepot\\src\\main\\java\\";
+	private final String PATH = "C:\\Users\\David\\IdeaProjects\\eDepot\\src\\main\\java\\";
 	public static final Scanner input = new Scanner(System.in); // This can be accessed from every class Depot.input
 	private Driver driver; // This variable lets the system know if the user is a manager or not, the menu
 	// shown will depend on this
-	private ArrayList<Depot> depots = new ArrayList<Depot>();
+	private List<Depot> depots = new ArrayList<Depot>();
 	private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
 
 	public DepotSystem() throws Exception
@@ -38,6 +37,7 @@ public class DepotSystem  implements Serializable
 		String choice = "";
 		do
 		{
+			System.out.println("TODO CREATE VEHICLES, SAVING AND COMMENTING AND DOCUMENTS, OURS LOOKS REALLY BAD COMPARED TO GLYNS BECAUSE HALF OF OUR CODE IS IN THE WRONG PLACE");
 			System.out.println("Entry Menu");
 			System.out.println("[1] Logon");
 			System.out.println("[2] Quit");
@@ -139,10 +139,6 @@ public class DepotSystem  implements Serializable
 		depot = new Depot(s);
 	}
 
-	public void setIsManager(boolean b)
-	{
-		isManager = b;
-	}
 
 	public void listDepots()
 	{
@@ -170,10 +166,10 @@ public class DepotSystem  implements Serializable
 		boolean exit = false, validReg = false;
 		do
 		{
-
+			System.out.println("Depots");
 			listVehicles();
 			System.out.printf("%nSelect the registration number of the vehicle you wish to reassign: %n");
-			vehicleSelection = DepotSystem.input.next();
+			vehicleSelection = DepotSystem.input.nextLine();
 			for (Vehicle vehicle : vehicles)
 			{
 
@@ -183,7 +179,7 @@ public class DepotSystem  implements Serializable
 					System.out.printf("%nYou have selected vehicle: %s%n", vehicleSelection);
 					listDepots();
 					System.out.printf("%nPlease select the depot you want to reassign this vehicle to: %n");
-					depotSelection = DepotSystem.input.next();
+					depotSelection = DepotSystem.input.nextLine();
 					if ((depotSelection.equals("Liverpool") || depotSelection.equals("Leeds")
 						|| depotSelection.equals("Manchester")) && !depotSelection.equals(vehicle.getDepot()))
 					{
@@ -288,7 +284,7 @@ public class DepotSystem  implements Serializable
 		try {
 			ois = new ObjectInputStream(new FileInputStream(PATH + "depots.ser"));
 
-			depots = (ArrayList<Depot>)ois.readObject(); // this error is normal don't try fix it
+			depots = (List<Depot>)ois.readObject(); // this error is normal don't try fix it
 			ois.close();
 		}
 		catch (Exception e) {
