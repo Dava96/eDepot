@@ -390,52 +390,81 @@ public class DepotSystem
 		String vehicleSelection;
 		String depotSelection;
 		boolean exit = false, validReg = false, validLocation = false;
-		do
+		if (!depots.get(depotNo).getVehicles().isEmpty())
 		{
-			System.out.println("Depots");
-			depots.get(depotNo).listVehicles();
-			System.out.printf("%nSelect the registration number of the vehicle you wish to reassign: %n");
-			vehicleSelection = input.nextLine();
-			for (Vehicle vehicle : depots.get(depotNo).getVehicles())
+			do
 			{
-
-				if (vehicleSelection.equals(vehicle.getRegNo()))
+				System.out.println("Depots");
+				depots.get(depotNo).listVehicles();
+				System.out.printf("%nSelect the registration number of the vehicle you wish to reassign: %n");
+				vehicleSelection = input.nextLine();
+				for (Vehicle vehicle : depots.get(depotNo).getVehicles())
 				{
-					validReg = true;
-					System.out.printf("%nYou have selected vehicle: %s%n", vehicleSelection);
-					listDepots();
-					System.out.printf("%nPlease select the depot you want to reassign this vehicle to: %n");
-					depotSelection = input.nextLine();
 
-					for (Depot d : depots) {
-						if (depotSelection.equals(d.getDepotLocation())  && !depotSelection.equals(vehicle.getDepot())) {
-							validLocation = true;
-							System.out.printf("%nVehicle %s is now assigned to %s%n", vehicleSelection, depotSelection);
-							vehicle.setDepot(getDepot(depotSelection));
+					if (vehicleSelection.equals(vehicle.getRegNo()))
+					{
+						validReg = true;
+						System.out.printf("%nYou have selected vehicle: %s%n", vehicleSelection);
+						listDepots();
+						System.out.printf("%nPlease select the depot you want to reassign this vehicle to: %n");
+						depotSelection = input.nextLine();
 
-							exit = true;
-							break;
+						for (Depot d : depots)
+						{
+							if (depotSelection.equals(d.getDepotLocation()) && !depotSelection.equals(vehicle.getDepot()))
+							{
+								validLocation = true;
+								System.out.printf("%nVehicle %s is now assigned to %s%n", vehicleSelection, depotSelection);
+								vehicle.setDepot(getDepot(depotSelection));
+								if (depotSelection.equals("Lpool")) {
+									Vehicle v = depots.get(depotNo).getVehiclebyReg(vehicleSelection);
+									depots.get(0).makeVehicle(v);
+									depots.get(depotNo).removeByVehicleReg(vehicleSelection);
+									exit = true;
+									break;
+								}
+								if (depotSelection.equals("Leeds")) {
+								Vehicle v = depots.get(depotNo).getVehiclebyReg(vehicleSelection);
+								depots.get(1).makeVehicle(v);
+								depots.get(depotNo).removeByVehicleReg(vehicleSelection);
+								exit = true;
+								break;
+								}
+								if (depotSelection.equals("MChester")) {
+									Vehicle v = depots.get(depotNo).getVehiclebyReg(vehicleSelection);
+									depots.get(2).makeVehicle(v);
+									depots.get(depotNo).removeByVehicleReg(vehicleSelection);
+									exit = true;
+									break;
+								}
+								exit = true;
+								break;
 
-						} else {
-							validLocation = false;
+							}
+							else
+							{
+								validLocation = false;
+							}
 						}
 					}
+					else
+					{
+						validReg = false;
+					}
+
 				}
-				else
+				if (!validReg) //To prompt user to enter correct information
 				{
-					validReg = false;
+					System.out.printf("Please select a valid registration%n%n"); // prints when its not supposed to
+				}
+				if (!validLocation)
+				{
+					System.out.printf("%nThe vehicle is either already assigned to the depot, or the depot does not exist%n%n");
 				}
 
-			}
-			if (!validReg) //To prompt user to enter correct information
-			{
-				System.out.printf("Please select a valid registration%n%n"); // prints when its not supposed to
-			}
-			if (!validLocation) {
-				System.out.printf("%nThe vehicle is either already assigned to the depot, or the depot does not exist%n%n");
-			}
-
-		} while (!exit);
+			} while (!exit);
+		}
+		System.out.println("There are no vehicles in the Depot to reassign");
 	}
 
 	/**
