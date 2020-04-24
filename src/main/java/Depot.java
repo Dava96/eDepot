@@ -16,14 +16,12 @@ public class Depot {
 	public Depot(String depotLocation) throws Exception {
 		this.depotLocation = depotLocation;
 
-		drivers.add(new Driver("Spongebob", "Garysnail1", false, false));
-		drivers.add(new Driver("Homer", "Donutdonut1", false, true));
-		drivers.add(new Driver("Bart", "Shortsshort1", false, false));
+		//drivers.add(new Driver("Spongebob", "Garysnail1", false, false));
+		//drivers.add(new Driver("Homer", "Donutdonut1", false, true));
+		//drivers.add(new Driver("Bart", "Shortsshort1", false, false));
 
 		workSchedules.add(new WorkSchedule("Bob", LocalDate.parse("2020-05-05"), LocalDate.parse("2020-05-06")));
 		workSchedules.add(new WorkSchedule("Gary", LocalDate.parse("2020-04-25"), LocalDate.parse("2020-04-27")));
-		sortWorkSchedule();
-
 		System.out.println(drivers.toString());
 	}
 
@@ -44,7 +42,7 @@ public class Depot {
 	public boolean authenticate(String uName, String pWord) {
 		for (Driver driver : drivers) {
 			if (uName.equals(driver.userName) && pWord.equals(driver.passWord)) {
-				System.out.printf("%nWelcome back %s%n", uName);
+				System.out.printf("%nWelcome back %s 	Depot: %s%n", uName, depotLocation);
 				return true;
 			}
 		}
@@ -75,18 +73,19 @@ public class Depot {
 		do { // Loop is necessary to allow re entry of data should any erroneous dates be
 				// inputed
 			System.out.print("Please enter a client name: ");
-			String client = DepotSystem.input.next();
+			String client = DepotSystem.input.nextLine();
 
 			System.out.print("Please enter a start date [i.e 2020-05-15]: ");
-			String startDate = DepotSystem.input.next();
+			String startDate = DepotSystem.input.nextLine();
 
 			System.out.print("Please enter an end date [i.e 2020-05-17]: ");
-			String endDate = DepotSystem.input.next();
+			String endDate = DepotSystem.input.nextLine();
 			try {
 				// Try and create an object of the work schedule class with the user defined
 				// parameters
 				WorkSchedule schedule = new WorkSchedule(client, LocalDate.parse(startDate), LocalDate.parse(endDate));
 				workSchedules.add(schedule);
+				sortWorkSchedule();
 				System.out.printf("%nWork schedule successfully created %n%n");
 				break;
 			} catch (Exception e) {
@@ -101,22 +100,27 @@ public class Depot {
 	}
 
 	public void completeWorkSchedule() throws Exception {
-		boolean found = false;
+		boolean found = false, assigned = false;
 		do {
-			if(workSchedules.size()!=0) {
+			if(workSchedules.size() !=0) {
 				listWorkSchedulue();
 				System.out.printf("%nEnter the name of the client's schedue you wish to set as complete: ");
-				String choice = DepotSystem.input.next();
-				WorkSchedule completedSchedule = new WorkSchedule("", LocalDate.parse("2020-05-07"),
+				String choice = DepotSystem.input.nextLine();
+				WorkSchedule completedSchedule = new WorkSchedule(null, LocalDate.parse("2020-05-07"),
 						LocalDate.parse("2020-05-08"));
-				
 				for (WorkSchedule schedule : workSchedules) {
-					if (choice.equals(schedule.client)) {
+					if (choice.equals(schedule.client) && schedule.getDriverAssigned() != null) {
 						completedSchedule = schedule;
 						found = true;
+						assigned = true;
+					} else {
+						assigned = false;
 					}
+				} if (!assigned) {
+					System.out.printf("%nPlease enter a schedule that has a Driver assigned to it.%n");
+					found = true; // This is so if there is no schedules with a driver assigned to it, it will break the loop.
 				}
-				if (found == true) {
+				if (found) {
 					completedWorkSchedules.add(completedSchedule);
 					workSchedules.remove(completedSchedule);
 					for (Driver driver : drivers) {
@@ -130,12 +134,11 @@ public class Depot {
 						}
 
 					}
-
 				}
 			} else {
 				System.out.printf("%nThere are currently no active work schedules%n");
 			}
-		} while(found == false);
+		} while(!found);
 	}
 
 	public void listVehicles() {
@@ -152,7 +155,7 @@ public class Depot {
 	}
 
 	public void listWorkSchedulue() {
-		System.out.printf("%-10s %-10s %10s %n", "Client", "Start Date", "End Date");
+		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to");
 		for (WorkSchedule workSchedule : workSchedules) {
 			System.out.println(workSchedule.toString());
 
@@ -160,10 +163,10 @@ public class Depot {
 	}
 
 	public void listCompletedWorkSchedulue() {
-		System.out.printf("%-10s %-10s %10s %n", "Client", "Start Date", "End Date");
+		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to");
+		sortWorkSchedule();
 		for (WorkSchedule workSchedule : completedWorkSchedules) {
 			System.out.println(workSchedule.toString());
-
 		}
 	}
 
@@ -178,6 +181,7 @@ public class Depot {
 
 	public void sortWorkSchedule() {
 		workSchedules.sort(Comparator.comparing(WorkSchedule::getStartDate));
+		completedWorkSchedules.sort(Comparator.comparing(WorkSchedule::getStartDate));
 	}
 
 	public ArrayList<Driver> getDrivers() {
