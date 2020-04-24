@@ -20,9 +20,11 @@ public class Depot implements Serializable
 	public Depot(String depotLocation) throws Exception {
 		this.depotLocation = depotLocation;
 
-		drivers.add(new Driver("Spongebob", "Garysnail1", false, false));
-		drivers.add(new Driver("Homer", "Donutdonut1", false, true));
-		drivers.add(new Driver("Bart", "Shortsshort1", false, false));
+		drivers.add(new Driver("Glyn", "_Glyn", false, true));
+		drivers.add(new Driver("Sorren", "_Sorren", false, true));
+		drivers.add(new Driver("Kirsty", "_Kirsty", false, true));
+		drivers.add(new Driver("Homer", "_Homer", false, false));
+		drivers.add(new Driver("Bart", "_Bart", false, false));
 
 		workSchedules.add(new WorkSchedule("Bob", LocalDate.parse("2020-05-05"), LocalDate.parse("2020-05-06")));
 		workSchedules.add(new WorkSchedule("Gary", LocalDate.parse("2020-04-25"), LocalDate.parse("2020-04-27")));

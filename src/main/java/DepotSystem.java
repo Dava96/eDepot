@@ -10,7 +10,7 @@ public class DepotSystem
 {
 	private Depot depot;
 
-	private final String PATH = "C:\\Users\\David\\IdeaProjects\\eDepot\\src\\main\\java\\";
+	private final String PATH = "C:\\Users\\kebea\\";
 	public static final Scanner input = new Scanner(System.in); // This can be accessed from every class Depot.input
 	private Driver driver; // This variable lets the system know if the user is a manager or not, the menu
 	// shown will depend on this
