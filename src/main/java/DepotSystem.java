@@ -31,16 +31,17 @@ public class DepotSystem
 	public DepotSystem() throws Exception
 	{
 		deSerialize();
+		/*
 		//setDepot("Liverpool");
 		depots.add(new Depot("Lpool")); // 0
 		depots.add(new Depot("Leeds")); // 1
 		depots.add(new Depot("MChester")); // 2
-		depots.add(new Depot("London")); // 3
+		//depots.add(new Depot("London")); // 3
 
-		// Note Debugging data
+		/* Note Debugging data
 		depots.get(0).addDriver(new Driver("Glyn", "_Glyn", false, true, getDepot("Lpool")));
-		depots.get(1).addDriver(new Driver("Sorren", "_Sorren", false, true, getDepot("MChester")));
-		depots.get(2).addDriver(new Driver("Kirsty", "_Kirsty", false, true, getDepot("Leeds")));
+		depots.get(2).addDriver(new Driver("Sorren", "_Sorren", false, true, getDepot("MChester")));
+		depots.get(1).addDriver(new Driver("Kirsty", "_Kirsty", false, true, getDepot("Leeds")));
 		depots.get(0).addDriver(new Driver("Homer", "_Homer", false, false, getDepot("Lpool")));
 		depots.get(0).addDriver(new Driver("Bart", "_Bart", false, false, getDepot("MChester")));
 
@@ -54,14 +55,15 @@ public class DepotSystem
 		Vehicle v1 = new Tanker("Mercedes", "25-18", 15000, "OU04PFN", getDepot("Liverpool"), 2000, "Oil");
 		Vehicle v2 = new Tanker("Toyota", "A1", 12000, "AN69HTU", getDepot("Leeds"), 2000, "Water");
 		Vehicle v3 = new Truck("Vauxhall", "DS-54", 13000, "UT19PAL", getDepot("Manchester"), 1500);
-		depots.get(1).makeVehicle(v1);
+		depots.get(0).makeVehicle(v1);
 		depots.get(1).makeVehicle(v2);
-		depots.get(1).makeVehicle(v3);
+		depots.get(2).makeVehicle(v3);
 
 		//vehicles.add(new Tanker("Mercedes", "25-18", 15000, "OU04PFN", "Liverpool", 2000, "Oil"));
 		//vehicles.add(new Tanker("Toyota", "A1", 12000, "AN69HTU", "Leeds", 2000, "Water"));
 		//vehicles.add(new Truck("Vauxhall", "DS-54", 13000, "UT19PAL", "Manchester", 1500));
 
+		 */
 	}
 
 	/**
@@ -102,12 +104,12 @@ public class DepotSystem
 		String pWord;
 		Boolean exit = false;
 
-		System.out.println("Please enter your username: ");
-		uName = input.nextLine();
-
-		System.out.println("Please enter your password: ");
-		pWord = input.nextLine();
 		do {
+			System.out.println("Please enter your username: ");
+			uName = input.nextLine();
+
+			System.out.println("Please enter your password: ");
+			pWord = input.nextLine();
 			// The Last depot never works for some reason?
 			for (depotNo = 0; depotNo < depots.size(); depotNo++) {
 				depot = depots.get(depotNo); // Assigns the depot number to depot
@@ -116,9 +118,8 @@ public class DepotSystem
 					driver = depot.getDriver(uName); // if the depot has the combination of password and username set driver
 					exit = true;
 					break;
-				} else {
-					depotNo++;
 				}
+				depotNo++;
 			}
 		} while (!exit);
 		depotMenu();
@@ -389,7 +390,7 @@ public class DepotSystem
 	{
 		String vehicleSelection;
 		String depotSelection;
-		boolean exit = false, validReg = false, validLocation = false;
+		boolean exit = false, validReg = false, validLocation = false, removeMan = false, removeLee = false, removeLiv = false;
 		if (!depots.get(depotNo).getVehicles().isEmpty())
 		{
 			do
@@ -416,7 +417,8 @@ public class DepotSystem
 								validLocation = true;
 								System.out.printf("%nVehicle %s is now assigned to %s%n", vehicleSelection, depotSelection);
 								vehicle.setDepot(getDepot(depotSelection));
-								if (depotSelection.equals("Lpool")) {
+							/*	if (depotSelection.equals("Lpool")) { // invalid code, doesn't work But I was trying to remove the vehicle from one depo and move it to the next
+									removeLiv = true;
 									Vehicle v = depots.get(depotNo).getVehiclebyReg(vehicleSelection);
 									depots.get(0).makeVehicle(v);
 									depots.get(depotNo).removeByVehicleReg(vehicleSelection);
@@ -431,12 +433,13 @@ public class DepotSystem
 								break;
 								}
 								if (depotSelection.equals("MChester")) {
+
 									Vehicle v = depots.get(depotNo).getVehiclebyReg(vehicleSelection);
 									depots.get(2).makeVehicle(v);
 									depots.get(depotNo).removeByVehicleReg(vehicleSelection);
 									exit = true;
 									break;
-								}
+								} */
 								exit = true;
 								break;
 
