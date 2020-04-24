@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Depot implements Serializable
-{
+
+public class Depot implements Serializable {
 	private Vehicle vehicle;
 	private Vehicle[] vehicles = new Vehicle[5];
 	private Driver driver;
@@ -41,7 +41,8 @@ public class Depot implements Serializable
 			System.out.println("Please enter your password: ");
 			pWord = DepotSystem.input.nextLine();
 
-		} while (!authenticate(uName.trim(), pWord.trim()));
+		} while (!authenticate(uName.trim(), pWord.trim())); // Allows the system to ask for a user's info again if they
+																// entered it incorrectly
 		return getDriver(uName);
 	}
 
@@ -108,12 +109,13 @@ public class Depot implements Serializable
 	public void completeWorkSchedule() throws Exception {
 		boolean found = false, assigned = false;
 		do {
-			if(workSchedules.size() !=0) {
+			if (workSchedules.size() != 0) { // Make sure there is still active work schedules
 				listWorkSchedulue();
 				System.out.printf("%nEnter the name of the client's schedue you wish to set as complete: ");
 				String choice = DepotSystem.input.nextLine();
 				WorkSchedule completedSchedule = new WorkSchedule(null, LocalDate.parse("2020-05-07"),
-						LocalDate.parse("2020-05-08"));
+						LocalDate.parse("2020-05-08")); // Used as a place holder that we set equal to an existing
+														// schedule in line 120
 				for (WorkSchedule schedule : workSchedules) {
 					if (choice.equals(schedule.client) && schedule.getDriverAssigned() != null) {
 						completedSchedule = schedule;
@@ -122,20 +124,23 @@ public class Depot implements Serializable
 					} else {
 						assigned = false;
 					}
-				} if (!assigned) {
+				}
+				if (!assigned) {
 					System.out.printf("%nPlease enter a schedule that has a Driver assigned to it.%n");
-					found = true; // This is so if there is no schedules with a driver assigned to it, it will break the loop.
+					found = true; // This is so if there is no schedules with a driver assigned to it, it will
+									// break the loop.
 				}
 				if (found) {
 					completedWorkSchedules.add(completedSchedule);
 					workSchedules.remove(completedSchedule);
 					for (Driver driver : drivers) {
-						if (driver.getSchedule() != null) {
+						if (driver.getSchedule() != null) { // Checks if a driver has an assigned schedule
 							WorkSchedule ws = driver.getSchedule();
 							String client = ws.getClient();
-							if (client.equals(completedSchedule.getClient())) {
-								driver.setSchedule(null);
-								driver.setAssigned(false);
+							if (client.equals(completedSchedule.getClient())) { // Checks the assigned schedule matches
+																				// the one we want to delete
+								driver.setSchedule(null); // Deletes schedule from driver
+								driver.setAssigned(false);// Sets the drivers assigned attribute to false
 							}
 						}
 
@@ -144,7 +149,7 @@ public class Depot implements Serializable
 			} else {
 				System.out.printf("%nThere are currently no active work schedules%n");
 			}
-		} while(!found);
+		} while (!found);
 	}
 
 	public void listVehicles() {
@@ -161,7 +166,13 @@ public class Depot implements Serializable
 	}
 
 	public void listWorkSchedulue() {
-		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to"); // Used to format the print in a table like structure
+		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to"); // Used to
+																											// format
+																											// the print
+																											// in a
+																											// table
+																											// like
+																											// structure
 		for (WorkSchedule workSchedule : workSchedules) {
 			System.out.println(workSchedule.toString());
 
@@ -169,7 +180,13 @@ public class Depot implements Serializable
 	}
 
 	public void listCompletedWorkSchedulue() {
-		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to"); // Used to format the print in a table like structure
+		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to"); // Used to
+																											// format
+																											// the print
+																											// in a
+																											// table
+																											// like
+																											// structure
 		sortWorkSchedule();
 		for (WorkSchedule workSchedule : completedWorkSchedules) {
 			System.out.println(workSchedule.toString());
@@ -185,7 +202,8 @@ public class Depot implements Serializable
 		return workSchedules;
 	}
 
-	public void sortWorkSchedule() { // sorts both the workSchedule and Completed workSchedule arrayLists by start date
+	public void sortWorkSchedule() { // sorts both the workSchedule and Completed workSchedule arrayLists by start
+										// date
 		workSchedules.sort(Comparator.comparing(WorkSchedule::getStartDate));
 		completedWorkSchedules.sort(Comparator.comparing(WorkSchedule::getStartDate));
 	}
@@ -207,8 +225,7 @@ public class Depot implements Serializable
 		return null;
 	}
 
-	public String getDepotLocation()
-	{
+	public String getDepotLocation() {
 		return depotLocation;
 	}
 }

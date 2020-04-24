@@ -1,10 +1,26 @@
 import java.io.Serializable;
+/**
+ * 
+ * @author Kyle Ellison-Beattie
+ * @author David Lomath Connis
+ * This is the class that allows us to define a vehicle, it is the super class
+ * of truck and tanker.
+ */
 
 public abstract class Vehicle implements Serializable
 {
 	protected String make, model, regNo, depot;
 	protected int weight;
 	protected boolean assigned;
+	
+	/**
+	 * This is the constructor that allows us to define a vehicle object
+	 * @param make The vehicles make
+	 * @param model The vehicles model
+	 * @param weight The vehicles weight
+	 * @param regNo The vehicles registration number
+	 * @param depot The depot the vehicle is assigned to
+	 */
 
 	public Vehicle(String make, String model, int weight, String regNo, String depot) {
 		this.make = make;
@@ -13,7 +29,10 @@ public abstract class Vehicle implements Serializable
 		this.regNo = regNo;
 		this.depot = depot;
 	}
-
+/**
+ * This method checks if a vehicle is currently in use
+ * @return true or false based on the status of the vehicle.
+ */
 	public boolean isAvaliable() {
 		if (assigned) return true;
 		return false; // returns false if assigned = true
@@ -24,14 +43,26 @@ public abstract class Vehicle implements Serializable
 		return make + " " + model + " " + regNo + " " + weight + this.getClass().getSimpleName();
 	}
 	
+	/**
+	 * This method allows us to set the depot a vehicle is assigned to
+	 * @param d The name of the depot
+	 */
+	
 	public void setDepot(String d) {
 		this.depot = d;
 	}
 	
+	/**
+	 * Gets the vehicles registration number
+	 * @return the vehicles registration number
+	 */
 	public String getRegNo() {
 		return regNo;
 	}
-	
+	/**
+	 * Gets the name of the depot the vehicle is assigned to
+	 * @return The name of the depot.
+	 */
 	public String getDepot() {
 		return depot;
 	}

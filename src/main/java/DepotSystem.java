@@ -5,7 +5,14 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * @author Kyle Ellison-Beattie
+ * @author David Lomath Connis
+ * This is the class through which contains the menus required to navigate the program
+ * and a number of methods which are used within the menus.
+ * 
+ *
+ */
 public class DepotSystem
 {
 	private Depot depot;
@@ -30,6 +37,13 @@ public class DepotSystem
 		vehicles.add(new Truck("Vauxhall", "DS-54", 13000, "UT19PAL", "Manchester", 1500));
 
 	}
+	
+	/**
+	 * This method is used to call our entry menu. The entry menu will give the user
+	 * the option to log in or exit the system. It is called upon execution and again
+	 * later when a user logs out.
+	 * @throws Exception
+	 */
 
 	public void entryMenu() throws Exception
 	{
@@ -52,19 +66,25 @@ public class DepotSystem
 		} while (!choice.equals("2"));
 		input.close();
 		serialize();
-		System.exit(0);
+		System.exit(0); // To exit system
 	}
-
+	
+	/**
+	 * The run method shows the user 1 of 2 menus (depending on if they are a manager).
+	 * The menus contain all the options they need and it is used to call the other methods
+	 * we have written.
+	 * @throws Exception
+	 */
 	private void run() throws Exception
 	{
 		String choice;
 		while (true)
 		{
-			driver = depot.logOn();
+			driver = depot.logOn(); //logOn returns the driver
 			break;
 		}
 
-		if (driver.getIsManager())
+		if (driver.getIsManager()) //Checks if a driver is set as a manager
 		{
 			do
 			{
@@ -111,7 +131,7 @@ public class DepotSystem
 
 			} while (true);
 		}
-		else
+		else //If driver is not a manager, they will be shown a more limited menu
 		{
 			do
 			{
@@ -130,18 +150,28 @@ public class DepotSystem
 			} while (true);
 		}
 	}
-
+	/**
+	 * Gets the value of the depot
+	 * @return This is the depot
+	 */
 	public Depot getDepot()
 	{
 		return depot;
 	}
-
+	
+/**
+ * Allows us to rename the depot
+ * @param s This is the new name for the depot
+ * @throws Exception
+ */
 	public void setDepot(String s) throws Exception
 	{
 		depot = new Depot(s);
 	}
 
-
+/**
+ * This method lists all the depots
+ */
 	public void listDepots()
 	{
 		for (Depot depot : depots)
@@ -150,6 +180,10 @@ public class DepotSystem
 		}
 
 	}
+	
+	/**
+	 * This method lists all of the vehicles
+	 */
 
 	public void listVehicles()
 	{
@@ -161,6 +195,11 @@ public class DepotSystem
 		}
 	}
 
+	/**
+	 * This method allows a user with manager permissions to reassign vehicles.
+	 * They will select a vehicle from the menu and then select the new depot
+	 * that they want to send the selected vehicle to.
+	 */
 	public void reAssignVehicles()
 	{
 		String vehicleSelection;
@@ -203,13 +242,20 @@ public class DepotSystem
 				}
 
 			}
-			if (!validReg)
+			if (!validReg) //To prompt user to enter correct information
 			{
 				System.out.printf("Please select a valid registration%n%n");
 			}
 
 		} while (!exit);
 	}
+	
+	/**
+	 * This method allows a user with manager permission to add a 
+	 * new vehicle to the list. They will enter all of the vehicles attributes,
+	 * and the vehicle will be added.
+	 * 
+	 */
 
 	public void createVehicle()
 	{
@@ -293,6 +339,12 @@ public class DepotSystem
 		} while (!exit);
 
 	}
+	
+	/**
+	 * This method allows a user with manager permissions to add a 
+	 * new driver to the system. They will add all of the drivers 
+	 * attributes and the new driver will be added to the list.
+	 */
 
 	public void createDriver()
 	{
@@ -341,6 +393,14 @@ public class DepotSystem
 	} while (!exit);
 
 }
+	/**
+	 * This methods returns all the data on a depot when you 
+	 * input a location.
+	 * @param location This is the location of the depot we want 
+	 * to find
+	 * @return A depot will be returned if the parameter matches 
+	 * a depot location. It will return null if not.
+	 */
 
 	public Depot getDepot(String location) {
 		for (Depot depot : depots) {
@@ -350,7 +410,15 @@ public class DepotSystem
 		}
 		return null;
 	}
-
+	
+/**
+ * This method returns a specific vehicle that matches
+ * the inputed registration
+ * @param regNo The method finds a vehicle with this
+ * registration.
+ * @return Returns the vehicle if the registration is a match, 
+ * otherwise it returns null.
+ */
 	public Vehicle getVehicleReg(String regNo) {
 		for (Vehicle v : vehicles) {
 			if (regNo.equals(v.regNo)) {
@@ -359,6 +427,10 @@ public class DepotSystem
 		}
 		return null;
 	}
+	
+	/**
+	 * This method allows for serialisation of objects upon program exit.
+	 */
 
 	private void serialize() {
 		ObjectOutputStream oos;
@@ -371,7 +443,9 @@ public class DepotSystem
 			System.out.println(e.getMessage());
 		}
 	}
-
+/**
+ * This method allows for deserialisation of objects upon program start.
+ */
 	private void deSerialize() {
 		ObjectInputStream ois;
 
