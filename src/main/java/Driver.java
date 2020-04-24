@@ -32,12 +32,11 @@ public class Driver implements Serializable
 	}
 
 	public boolean checkPassword(String passWord) {
-		// need to write the exception for this
 		char[] capsCheck;
-		if (passWord.length() >= 8) {
-			capsCheck = passWord.toCharArray();
+		if (passWord.length() >= 8) { // checks if the user entered password is within a certain length
+			capsCheck = passWord.toCharArray(); // converts the entered password to a charArray.
 			for (char c : capsCheck) {
-				if (Character.isUpperCase(c)) {
+				if (Character.isUpperCase(c)) { // checks for a capital letter
 					setPassWord(passWord);
 					return true;
 				} else {

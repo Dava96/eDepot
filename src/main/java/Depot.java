@@ -159,7 +159,7 @@ public class Depot implements Serializable
 	}
 
 	public void listWorkSchedulue() {
-		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to");
+		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to"); // Used to format the print in a table like structure
 		for (WorkSchedule workSchedule : workSchedules) {
 			System.out.println(workSchedule.toString());
 
@@ -167,7 +167,7 @@ public class Depot implements Serializable
 	}
 
 	public void listCompletedWorkSchedulue() {
-		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to");
+		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to"); // Used to format the print in a table like structure
 		sortWorkSchedule();
 		for (WorkSchedule workSchedule : completedWorkSchedules) {
 			System.out.println(workSchedule.toString());
@@ -183,7 +183,7 @@ public class Depot implements Serializable
 		return workSchedules;
 	}
 
-	public void sortWorkSchedule() {
+	public void sortWorkSchedule() { // sorts both the workSchedule and Completed workSchedule arrayLists by start date
 		workSchedules.sort(Comparator.comparing(WorkSchedule::getStartDate));
 		completedWorkSchedules.sort(Comparator.comparing(WorkSchedule::getStartDate));
 	}
