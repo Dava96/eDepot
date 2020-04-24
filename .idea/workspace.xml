@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b15a0295-1074-4ed6-9824-314558fbb2e1" name="Default Changelist" comment="Vehicle Inheritence">
+    <list default="true" id="b15a0295-1074-4ed6-9824-314558fbb2e1" name="Default Changelist" comment="fixup! Add Work schedule Assigning functionality">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Depot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Depot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DepotSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DepotSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/WorkSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WorkSchedule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Depot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Depot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/DepotSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DepotSystem.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Driver$Manager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Driver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Driver.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Entry.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Entry.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Vehicle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Vehicle.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/WorkSchedule.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/WorkSchedule.class" afterDir="false" />
@@ -37,7 +36,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Attempt-fixing" />
+        <entry key="$PROJECT_DIR$" value="savingData" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,11 +65,18 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Entry (1)">
+    <configuration name="Entry (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Entry" />
+      <module name="eDepot" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Entry" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="12.0.2" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="Entry" />
+      <option name="MAIN_CLASS_NAME" value="Input.Entry" />
       <module name="eDepot" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -78,6 +84,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Entry (1)" />
+        <item itemvalue="Application.Entry" />
+        <item itemvalue="Application.Entry (1)" />
         <item itemvalue="Application.Entry" />
         <item itemvalue="Application.Entry" />
       </list>
@@ -115,7 +124,12 @@
       <workItem from="1584744315312" duration="64000" />
       <workItem from="1584744431851" duration="102000" />
       <workItem from="1585043471305" duration="1358000" />
-      <workItem from="1587327820027" duration="3151000" />
+      <workItem from="1587327820027" duration="4049000" />
+      <workItem from="1587495295599" duration="23171000" />
+      <workItem from="1587551117703" duration="4031000" />
+      <workItem from="1587592100357" duration="1297000" />
+      <workItem from="1587643763947" duration="17849000" />
+      <workItem from="1587693094748" duration="8441000" />
     </task>
     <task id="LOCAL-00001" summary="Vehicle Inheritence">
       <created>1585070389635</created>
@@ -138,7 +152,42 @@
       <option name="project" value="LOCAL" />
       <updated>1587242335287</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add Work schedule Assigning functionality">
+      <created>1587331073065</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1587331073065</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add WorkSchedule sorting">
+      <created>1587509754948</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1587509754948</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Prevent the assignSchedule method from printing multiple times">
+      <created>1587592145491</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1587592145491</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Fixed Formatting on printing WorkSchedules and Vehicles">
+      <created>1587658663830</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1587658663830</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Fixed printing bugs, Implemented Driver assigned to in work schedule and Started working on saving.">
+      <created>1587689458254</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1587689458254</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,85 +210,120 @@
     <MESSAGE value="Implemented Logon System" />
     <MESSAGE value="Vehicle Inheritence" />
     <MESSAGE value="Fixing WorkSchedule" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing WorkSchedule" />
+    <MESSAGE value="Add Work schedule Assigning functionality" />
+    <MESSAGE value="Add WorkSchedule sorting" />
+    <MESSAGE value="Prevent the assignSchedule method from printing multiple times" />
+    <MESSAGE value="Fixed Formatting on printing WorkSchedules and Vehicles" />
+    <MESSAGE value="Fixed printing bugs, Implemented Driver assigned to in work schedule and Started working on saving." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed printing bugs, Implemented Driver assigned to in work schedule and Started working on saving." />
   </component>
   <component name="WindowStateProjectService">
     <state x="0" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584644522946">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="0" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584644522946" />
-    <state x="730" y="222" key="#com.intellij.ide.util.MemberChooser" timestamp="1584645930533">
+    <state x="730" y="222" key="#com.intellij.ide.util.MemberChooser" timestamp="1587503775989">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="730" y="222" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584645930533" />
-    <state x="585" y="115" key="CommitChangelistDialog2" timestamp="1587242359115">
+    <state x="730" y="222" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1587503775989" />
+    <state x="800" y="199" key="CommitChangelistDialog2" timestamp="1587689457716">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="585" y="115" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1587242359115" />
+    <state x="800" y="199" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1587689457716" />
     <state width="427" height="466" key="DebuggerActiveHint" timestamp="1587240269510">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="427" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1587240269510" />
-    <state x="184" y="92" key="DiffContextDialog" timestamp="1587242088199">
+    <state x="184" y="92" key="DiffContextDialog" timestamp="1587331198374">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="184" y="92" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587242088199" />
+    <state x="184" y="92" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587331198374" />
     <state x="740" y="276" key="FileChooserDialogImpl" timestamp="1584724323878">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584724323878" />
-    <state width="938" height="284" key="GridCell.Tab.0.bottom" timestamp="1587330986572">
+    <state x="820" y="454" key="Github.Dialog.Accounts.Choose" timestamp="1587658673983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587330986572" />
-    <state width="938" height="284" key="GridCell.Tab.0.center" timestamp="1587330986572">
+    <state x="820" y="454" key="Github.Dialog.Accounts.Choose/0.0.1920.1040@0.0.1920.1040" timestamp="1587658673983" />
+    <state width="938" height="284" key="GridCell.Tab.0.bottom" timestamp="1587701437925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587330986572" />
-    <state width="938" height="284" key="GridCell.Tab.0.left" timestamp="1587330986572">
+    <state width="938" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587701437925" />
+    <state width="938" height="284" key="GridCell.Tab.0.center" timestamp="1587701437925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587330986572" />
-    <state width="938" height="284" key="GridCell.Tab.0.right" timestamp="1587330986572">
+    <state width="938" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587701437925" />
+    <state width="938" height="284" key="GridCell.Tab.0.left" timestamp="1587701437924">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587330986572" />
-    <state width="938" height="348" key="GridCell.Tab.1.bottom" timestamp="1587330976839">
+    <state width="938" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587701437924" />
+    <state width="938" height="284" key="GridCell.Tab.0.right" timestamp="1587701437925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587330976839" />
-    <state width="938" height="348" key="GridCell.Tab.1.center" timestamp="1587330976839">
+    <state width="938" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587701437925" />
+    <state width="938" height="348" key="GridCell.Tab.1.bottom" timestamp="1587701284006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587330976839" />
-    <state width="938" height="348" key="GridCell.Tab.1.left" timestamp="1587330976839">
+    <state width="938" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587701284006" />
+    <state width="938" height="348" key="GridCell.Tab.1.center" timestamp="1587701284006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587330976839" />
-    <state width="938" height="348" key="GridCell.Tab.1.right" timestamp="1587330976839">
+    <state width="938" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587701284006" />
+    <state width="938" height="348" key="GridCell.Tab.1.left" timestamp="1587701284006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587330976839" />
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1587242393330">
+    <state width="938" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587701284006" />
+    <state width="938" height="348" key="GridCell.Tab.1.right" timestamp="1587701284006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587242393330" />
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1587327819790">
+    <state width="938" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587701284006" />
+    <state x="672" y="237" key="MultipleFileMergeDialog" timestamp="1587655744303">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587327819790" />
-    <state x="769" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587327833999">
+    <state x="672" y="237" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587655744303" />
+    <state x="764" y="232" key="RollbackChangesDialog" timestamp="1587331104215">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="769" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587327833999" />
+    <state x="764" y="232" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587331104215" />
+    <state x="807" y="437" key="VCS.ChangelistChooser" timestamp="1587331171609">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="807" y="437" key="VCS.ChangelistChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1587331171609" />
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2" timestamp="1587689471193">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="254" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587689471193" />
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1587693138814">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587693138814" />
+    <state x="769" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587689537126">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="769" y="438" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1587689537126" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1587698181893">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1587698181893" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Driver.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/src/main/java/DepotSystem.java</url>
+          <line>245</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Depot.java</url>
+          <line>193</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/DepotSystem.java</url>
+          <line>64</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

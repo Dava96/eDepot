@@ -6,6 +6,7 @@ public class Driver implements Serializable
 	protected String passWord;
 	private boolean assigned; // not sure if this is private or protected yet
 	private boolean isManager; // to check if a driver is a manager or not
+	private String location;
 	private Depot depot;
 	private WorkSchedule schedule;
 
@@ -18,6 +19,16 @@ public class Driver implements Serializable
 		this.assigned = assigned;
 		this.isManager = isManager;
 		this.schedule = null;
+		this.depot = null;
+	}
+
+	public Driver(String userName, String passWord, boolean assigned, boolean isManager, Depot location) {
+		this.userName = userName.trim();
+		checkPassword(passWord.trim());
+		this.assigned = assigned;
+		this.isManager = isManager;
+		this.schedule = null;
+		this.depot = location;
 	}
 
 	public boolean checkPassword(String passWord) {

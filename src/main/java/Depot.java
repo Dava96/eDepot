@@ -1,8 +1,10 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class Depot {
+public class Depot implements Serializable
+{
 	private Vehicle vehicle;
 	private Vehicle[] vehicles = new Vehicle[5];
 	private Driver driver;
@@ -16,9 +18,9 @@ public class Depot {
 	public Depot(String depotLocation) throws Exception {
 		this.depotLocation = depotLocation;
 
-		//drivers.add(new Driver("Spongebob", "Garysnail1", false, false));
-		//drivers.add(new Driver("Homer", "Donutdonut1", false, true));
-		//drivers.add(new Driver("Bart", "Shortsshort1", false, false));
+		drivers.add(new Driver("Spongebob", "Garysnail1", false, false));
+		drivers.add(new Driver("Homer", "Donutdonut1", false, true));
+		drivers.add(new Driver("Bart", "Shortsshort1", false, false));
 
 		workSchedules.add(new WorkSchedule("Bob", LocalDate.parse("2020-05-05"), LocalDate.parse("2020-05-06")));
 		workSchedules.add(new WorkSchedule("Gary", LocalDate.parse("2020-04-25"), LocalDate.parse("2020-04-27")));
@@ -188,6 +190,10 @@ public class Depot {
 		return drivers;
 	}
 
+	public void addDriver(Driver driver) {
+		drivers.add(driver);
+	}
+
 	public WorkSchedule getWorkSchedule(String clientName) {
 		for (WorkSchedule workSchedule : workSchedules) {
 			if (clientName.equals(workSchedule.client)) {
@@ -195,5 +201,10 @@ public class Depot {
 			}
 		}
 		return null;
+	}
+
+	public String getDepotLocation()
+	{
+		return depotLocation;
 	}
 }
