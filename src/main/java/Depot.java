@@ -51,6 +51,10 @@ public class Depot implements Serializable
 		return null;
 	}
 
+	public void removeByVehicleReg(String regNo) {
+		vehicles.removeIf(v -> v.getRegNo().equals(regNo));
+	}
+
 	/**
 	 * This method First checks if the vehicles arraylist is empty
 	 * If it is not empty, it will print out a table like structure
