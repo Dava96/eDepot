@@ -117,7 +117,6 @@ public class DepotSystem
 					exit = true;
 					break;
 				}
-				depotNo++;
 			}
 		} while (!exit);
 		depotMenu();
