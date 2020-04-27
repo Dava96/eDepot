@@ -323,20 +323,17 @@ public class DepotSystem
 	public void completeWorkSchedule() throws Exception
 	{
 		boolean found = false, assigned = false;
+		WorkSchedule ws;
 		do {
 			if(depots.get(depotNo).getWorkSchedules().size() !=0) { // Make sure there is still active work schedules
 				depots.get(depotNo).listWorkSchedulue();
-				System.out.printf("%nEnter the name of the client's schedue you wish to set as complete: ");
+				System.out.printf("%nEnter the name of the client's schedule you wish to set as complete: ");
 				String choice = input.nextLine();
-				WorkSchedule completedSchedule = new WorkSchedule(null, LocalDate.parse("2020-05-07"),
-					LocalDate.parse("2020-05-08")); // Used as a place holder that we set equal to an existing schedulue
+					//LocalDate.parse("2020-05-08")); // Used as a place holder that we set equal to an existing schedulue
 				// needs fixing
-				depots.get(depotNo).addCompletedWorkSchedule(completedSchedule);
 				for (WorkSchedule schedule : depots.get(depotNo).getWorkSchedules()) {
 					if (choice.equals(schedule.client) && schedule.getDriverAssigned() != null) {
-						completedSchedule = schedule;
-						found = true;
-						assigned = true;
+						found = true; assigned = true;
 					} else {
 						assigned = false;
 					}
@@ -344,22 +341,23 @@ public class DepotSystem
 					System.out.printf("%nPlease enter a schedule that has a Driver assigned to it.%n");
 					found = true; // This is so if there is no schedules with a driver assigned to it, it will break the loop.
 				}
-				if (found) {
-					depots.get(depotNo).addCompletedWorkSchedule(completedSchedule);
-					depots.get(depotNo).getWorkSchedules().remove(completedSchedule);
-					for (Driver driver : depots.get(depotNo).getDrivers()) {
-						if (driver.getSchedule() != null) { // Checks if a driver has an assigned schedule
-							WorkSchedule ws = driver.getSchedule();
-							String client = ws.getClient();
-							if (client.equals(completedSchedule.getClient())) { // Checks the assigned schedule matches
-																				// the one we want to delete
-								driver.setSchedule(null); // Deletes schedule from driver
-								driver.setAssigned(false); // Sets the drivers assigned attribute to false
-								sortWorkSchedule(); // Sorts the workschedulues by Start date
-							}
-						}
 
+				ws = depots.get(depotNo).getWorkSchedule(choice);
+				depots.get(depotNo).addCompletedWorkSchedule(ws);
+				depots.get(depotNo).getWorkSchedules().remove(ws);
+
+				for (Driver driver : depots.get(depotNo).getDrivers()) {
+					if (driver.getSchedule() != null) { // Checks if a driver has an assigned schedule
+						WorkSchedule ws1 = driver.getSchedule();
+						String client = ws1.getClient();
+						if (client.equals(ws.getClient())) { // Checks the assigned schedule matches
+																			// the one we want to delete
+							driver.setSchedule(null); // Deletes schedule from driver
+							driver.setAssigned(false); // Sets the drivers assigned attribute to false
+							sortWorkSchedule(); // Sorts the workschedulues by Start date
+						}
 					}
+
 				}
 			} else {
 				System.out.printf("%nThere are currently no active work schedules%n");
