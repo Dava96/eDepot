@@ -94,8 +94,7 @@ public class Driver implements Serializable
 	 * @return true if the driver is assigned, false if they are not.
 	 */
 	public boolean isAvaliable() {
-		if (assigned) return true;
-		return false; // returns false if assigned = true
+		return assigned;// returns false if assigned = true
 	}
 
 	@Override
