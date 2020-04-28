@@ -103,7 +103,7 @@ public class DepotSystem
 	{
 		driver = null;
 		String uName, pWord;
-		Boolean exit = false, valid = false;
+		boolean exit = false, valid = false;
 
 		do {
 			System.out.println("Please enter your username: ");
@@ -240,7 +240,7 @@ public class DepotSystem
 
 	public void assignSchedule() {
 		String client, driver;
-		Boolean exit = false, validClient = false, validDriver = false;
+		boolean exit = false, validClient = false, validDriver = false;
 
 		if(depots.get(depotNo).getWorkSchedules().size() != 0) {
 			do {
@@ -388,7 +388,7 @@ public class DepotSystem
 	 */
 	public void reAssignVehicles()
 	{
-		String vehicleSelection = "";
+		String vehicleSelection;
 		String depotSelection = "";
 		boolean exit = false, validReg = false, validLocation = false;
 		int i = 0; // used to count which depot selected
@@ -464,7 +464,7 @@ public class DepotSystem
 	 */
 	public void createVehicle()
 	{
-		String vMake, vModel = "", vRegNo = "", vDepo = "", yesNo, liquidType = "";
+		String vMake, vModel = "", vRegNo = "", vDepo, yesNo, liquidType = "";
 		int weight = 0, capacity = 0;
 		Depot depotLocation = null;
 		boolean isTruck = false, isTanker = false, exit = false, validLocation = true, duplicateReg = true;
@@ -494,8 +494,10 @@ public class DepotSystem
 				}
 
 				for (Vehicle v : depots.get(depotNo).getVehicles()) {
-					if (vRegNo.equals(v.getRegNo())) {
+					if (vRegNo.equals(v.getRegNo()))
+					{
 						duplicateReg = false;
+						break;
 					}
 				}	if (!duplicateReg) { // If the registration is duplicate, print this line
 					System.out.println("You have Entered a duplicate Registration number");

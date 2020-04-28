@@ -36,8 +36,7 @@ public abstract class Vehicle implements Serializable
 	 * @return true or false based on the status of the vehicle.
 	 */
 	public boolean isAvaliable() {
-		if (assigned) return true;
-		return false; // returns false if assigned = true
+		return assigned; // returns false if assigned = true
 	}
 
 	@Override
