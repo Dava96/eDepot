@@ -102,9 +102,8 @@ public class DepotSystem
 	private void logOn() throws Exception
 	{
 		driver = null;
-		String uName;
-		String pWord;
-		Boolean exit = false;
+		String uName, pWord;
+		Boolean exit = false, valid = false;
 
 		do {
 			System.out.println("Please enter your username: ");
@@ -118,8 +117,11 @@ public class DepotSystem
 					// with that combination of username and password
 					driver = depot.getDriver(uName); // if the depot has the combination of password and username set driver
 					exit = true;
+					valid = true;
 					break;
 				}
+			} if (!valid) {
+				System.out.printf("Incorrect login credentials please try again %n%n");
 			}
 		} while (!exit);
 		depotMenu();

@@ -55,11 +55,10 @@ public class Depot implements Serializable
 		for (Driver driver : drivers) {
 			if (uName.equals(driver.userName) && pWord.equals(driver.passWord)) {
 				System.out.printf("%nWelcome back %s 	Depot: %s%n", uName, depotLocation);
-				getDriver();
+				//getDriver();
 				return true;
 			}
 		}
-		System.out.printf("Incorrect login credentials please try again %n%n");
 		return false;
 	}
 
