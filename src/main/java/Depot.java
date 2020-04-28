@@ -70,8 +70,9 @@ public class Depot implements Serializable
 	 */
 	public Vehicle getVehiclebyReg(String regNo) {
 		for (Vehicle v : vehicles) {
-			if (v.getRegNo().equals(regNo));
-			return v;
+			if (regNo.equals(v.regNo)) {
+				return v;
+			}
 		}
 		return null;
 	}
@@ -94,11 +95,11 @@ public class Depot implements Serializable
 	{
 		if (!vehicles.isEmpty())
 		{
-			System.out.printf("%-10s %-10s %-12s %6s %10s%n", "Make", "Model", "Registration", "Depot", "Type"); // Used to format the print in a table like structure
+			System.out.printf("%-10s %-10s %-15s %8s %10s%n", "Make", "Model", "Registration", "Depot", "Type"); // Used to format the print in a table like structure
 			{
 				for (Vehicle vehicle : vehicles)
 				{
-					System.out.printf("%-10s %-10s %-10s %12s %8s %n", vehicle.make, vehicle.model,
+					System.out.printf("%-10s %-10s %-15s %8s %10s %n", vehicle.make, vehicle.model,
 						vehicle.regNo, vehicle.depot, vehicle.getClass().getName());
 				}
 			}
@@ -107,7 +108,7 @@ public class Depot implements Serializable
 	}
 
 	/**
-	 * This method gets a driver
+	 * This method gets a driver1
 	 * @return the driver
 	 */
 	public Driver getDriver() {

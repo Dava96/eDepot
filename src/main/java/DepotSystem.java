@@ -31,6 +31,7 @@ public class DepotSystem
 	public DepotSystem() throws Exception
 	{
 		deSerialize();
+
 		/*
 		//setDepot("Liverpool");
 		depots.add(new Depot("Lpool")); // 0
@@ -38,7 +39,7 @@ public class DepotSystem
 		depots.add(new Depot("MChester")); // 2
 		//depots.add(new Depot("London")); // 3
 
-		/* Note Debugging data
+		// Note Debugging data
 		depots.get(0).addDriver(new Driver("Glyn", "_Glyn", false, true, getDepot("Lpool")));
 		depots.get(2).addDriver(new Driver("Sorren", "_Sorren", false, true, getDepot("MChester")));
 		depots.get(1).addDriver(new Driver("Kirsty", "_Kirsty", false, true, getDepot("Leeds")));
@@ -46,22 +47,24 @@ public class DepotSystem
 		depots.get(0).addDriver(new Driver("Bart", "_Bart", false, false, getDepot("MChester")));
 
 		WorkSchedule bob = new WorkSchedule("Bob", LocalDate.parse("2020-05-05"), LocalDate.parse("2020-05-06"));
-		WorkSchedule Gary = new WorkSchedule("Gary", LocalDate.parse("2020-04-25"), LocalDate.parse("2020-04-27"));
+		WorkSchedule Gary = new WorkSchedule("Gary", LocalDate.parse("2020-04-29"), LocalDate.parse("2020-05-01"));
 		depots.get(1).addWorkSchedule(bob);
 		depots.get(1).addWorkSchedule(Gary);
 
 		//depots.get(0).addDriver((new Driver("Spongebob", "Garysnail1", false, false)));
 		//depots.get(0).addDriver((new Driver("Homer", "Donutdonut1", false, true)));
-		Vehicle v1 = new Tanker("Mercedes", "25-18", 15000, "OU04PFN", getDepot("Liverpool"), 2000, "Oil");
+		Vehicle v1 = new Tanker("Mercedes", "25-18", 15000, "OU04PFN", getDepot("Lpool"), 2000, "Oil");
 		Vehicle v2 = new Tanker("Toyota", "A1", 12000, "AN69HTU", getDepot("Leeds"), 2000, "Water");
-		Vehicle v3 = new Truck("Vauxhall", "DS-54", 13000, "UT19PAL", getDepot("Manchester"), 1500);
+		Vehicle v3 = new Truck("Vauxhall", "DS-54", 13000, "UT19PAL", getDepot("MChester"), 1500);
+		Vehicle v4 = new Truck("Volvo", "DS-54", 13000, "UF14PAF", getDepot("Lpool"), 1500);
 		depots.get(0).makeVehicle(v1);
 		depots.get(1).makeVehicle(v2);
 		depots.get(2).makeVehicle(v3);
+		depots.get(0).makeVehicle(v4);
 
-		//vehicles.add(new Tanker("Mercedes", "25-18", 15000, "OU04PFN", "Liverpool", 2000, "Oil"));
+		//vehicles.add(new Tanker("Mercedes", "25-18", 15000, "OU04PFN", "Lpool", 2000, "Oil"));
 		//vehicles.add(new Tanker("Toyota", "A1", 12000, "AN69HTU", "Leeds", 2000, "Water"));
-		//vehicles.add(new Truck("Vauxhall", "DS-54", 13000, "UT19PAL", "Manchester", 1500));
+		//vehicles.add(new Truck("Vauxhall", "DS-54", 13000, "UT19PAL", "MChester", 1500));
 
 		 */
 	}
@@ -383,9 +386,11 @@ public class DepotSystem
 	 */
 	public void reAssignVehicles()
 	{
-		String vehicleSelection;
-		String depotSelection;
-		boolean exit = false, validReg = false, validLocation = false, removeMan = false, removeLee = false, removeLiv = false;
+		String vehicleSelection = "";
+		String depotSelection = "";
+		boolean exit = false, validReg = false, validLocation = false;
+		int i = 0; // used to count which depot selected
+		Vehicle v;
 		if (!depots.get(depotNo).getVehicles().isEmpty())
 		{
 			do
@@ -407,42 +412,18 @@ public class DepotSystem
 
 						for (Depot d : depots)
 						{
-							if (depotSelection.equals(d.getDepotLocation()) && !depotSelection.equals(vehicle.getDepot()))
+							if (depotSelection.equals(d.getDepotLocation()) && !depotSelection.equals(vehicle.getDepot())) // if the vehicle exists at depot
 							{
 								validLocation = true;
 								System.out.printf("%nVehicle %s is now assigned to %s%n", vehicleSelection, depotSelection);
-								vehicle.setDepot(getDepot(depotSelection));
-							/*	if (depotSelection.equals("Lpool")) { // invalid code, doesn't work But I was trying to remove the vehicle from one depo and move it to the next
-									removeLiv = true;
-									Vehicle v = depots.get(depotNo).getVehiclebyReg(vehicleSelection);
-									depots.get(0).makeVehicle(v);
-									depots.get(depotNo).removeByVehicleReg(vehicleSelection);
 									exit = true;
 									break;
 								}
-								if (depotSelection.equals("Leeds")) {
-								Vehicle v = depots.get(depotNo).getVehiclebyReg(vehicleSelection);
-								depots.get(1).makeVehicle(v);
-								depots.get(depotNo).removeByVehicleReg(vehicleSelection);
-								exit = true;
-								break;
-								}
-								if (depotSelection.equals("MChester")) {
-
-									Vehicle v = depots.get(depotNo).getVehiclebyReg(vehicleSelection);
-									depots.get(2).makeVehicle(v);
-									depots.get(depotNo).removeByVehicleReg(vehicleSelection);
-									exit = true;
-									break;
-								} */
-								exit = true;
-								break;
-
-							}
 							else
 							{
 								validLocation = false;
 							}
+							i++;
 						}
 					}
 					else
@@ -459,10 +440,18 @@ public class DepotSystem
 				{
 					System.out.printf("%nThe vehicle is either already assigned to the depot, or the depot does not exist%n%n");
 				}
+				if (validLocation) {
+					v = depots.get(depotNo).getVehiclebyReg(vehicleSelection);
+					v.setDepot(getDepot(depotSelection));
+					depots.get(i).makeVehicle(v);
+					depots.get(depotNo).getVehicles().remove(v);
+				}
 
 			} while (!exit);
+		} else {
+			System.out.println("There are no vehicles in the Depot to reassign");
 		}
-		System.out.println("There are no vehicles in the Depot to reassign");
+
 	}
 
 	/**
