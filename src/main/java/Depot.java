@@ -103,8 +103,9 @@ public class Depot implements Serializable
 						vehicle.regNo, vehicle.depot, vehicle.getClass().getName());
 				}
 			}
+		}else {
+			System.out.println("There is no vehicles currently at this depot");
 		}
-		System.out.println("There is no vehicles currently at this depot");
 	}
 
 	/**
@@ -141,10 +142,12 @@ public class Depot implements Serializable
 	 * This method prints out a list of drivers
 	 */
 	public void listDrivers() {
-		for (Driver driver : drivers) {
-			System.out.println(driver.toString());
+		if (!drivers.isEmpty())
+		{
+			for (Driver driver : drivers) {
+				System.out.println(driver.toString());
+			}
 		}
-
 	}
 
 	/**
@@ -154,7 +157,6 @@ public class Depot implements Serializable
 		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to"); // Used to format the print in a table like structure
 		for (WorkSchedule workSchedule : workSchedules) {
 			System.out.println(workSchedule.toString());
-
 		}
 	}
 
