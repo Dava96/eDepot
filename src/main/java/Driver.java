@@ -68,7 +68,7 @@ public class Driver implements Serializable
 		// checks if the user entered password is within a certain length
 		capsCheck = passWord.toCharArray(); // converts the entered password to a charArray.
 		for (char c : capsCheck) {
-			if ((passWord.startsWith("_")) && (passWord.endsWith(userName))) { // checks for a capital letter
+			if ((passWord.startsWith("_")) && (passWord.contains(userName))) { // checks for a capital letter
 				setPassWord(passWord);
 				return true;
 			} else {

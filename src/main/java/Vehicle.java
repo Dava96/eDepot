@@ -23,7 +23,8 @@ public abstract class Vehicle implements Serializable
 	 * @param regNo The vehicles registration number
 	 * @param depot The depot the vehicle is assigned to
 	 */
-	public Vehicle(String make, String model, int weight, String regNo, Depot depot) {
+	public Vehicle(String make, String model, int weight, String regNo, Depot depot)
+	{
 		this.make = make;
 		this.model = model;
 		this.weight = weight;
@@ -67,4 +68,5 @@ public abstract class Vehicle implements Serializable
 	public String getDepot() {
 		return depot.toString();
 	}
+
 }

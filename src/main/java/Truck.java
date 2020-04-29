@@ -20,7 +20,8 @@ public class Truck extends Vehicle
 	 * @param depot The depot the truck is assigned to
 	 * @param cargoCapacity The capacity of the truck
 	 */
-	public Truck(String make, String model, Integer weight, String regNo, Depot depot, Integer cargoCapacity) {
+	public Truck(String make, String model, Integer weight, String regNo, Depot depot, Integer cargoCapacity)
+	{
 		super(make, model, weight, regNo, depot);
 
 		this.cargoCapacity = cargoCapacity;

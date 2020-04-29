@@ -106,6 +106,60 @@ public class Depot implements Serializable
 	}
 
 	/**
+	 * This method First checks if the vehicles arraylist is empty
+	 * If it is not empty, it will print out a table like structure
+	 * Then it will list all the Trucks belonging to that depot.
+	 */
+	public void listTrucks()
+{
+	if (!vehicles.isEmpty())
+	{
+		System.out.printf("%-10s %-10s %-15s %8s %10s%n", "Make", "Model", "Registration", "Depot", "Type"); // Used to format the print in a table like structure
+		{
+			for (Vehicle vehicle : vehicles)
+			{
+				if (vehicle.getClass().getName().equals("Truck"))
+				{
+					System.out.printf("%-10s %-10s %-15s %8s %10s %n", vehicle.make, vehicle.model,
+						vehicle.regNo, vehicle.depot, vehicle.getClass().getName());
+				}
+			}
+		}
+
+	}else
+	{
+		System.out.println("There is no vehicles currently at this depot");
+	}
+}
+
+	/**
+	 * This method First checks if the vehicles arraylist is empty
+	 * If it is not empty, it will print out a table like structure
+	 * Then it will list all the Tankers belonging to that depot.
+	 */
+	public void listTankers()
+	{
+		if (!vehicles.isEmpty())
+		{
+			System.out.printf("%-10s %-10s %-15s %8s %10s%n", "Make", "Model", "Registration", "Depot", "Type"); // Used to format the print in a table like structure
+			{
+				for (Vehicle vehicle : vehicles)
+				{
+					if (vehicle.getClass().getName().equals("Tanker"))
+					{
+						System.out.printf("%-10s %-10s %-15s %8s %10s %n", vehicle.make, vehicle.model,
+							vehicle.regNo, vehicle.depot, vehicle.getClass().getName());
+					}
+				}
+			}
+
+		}else
+		{
+			System.out.println("There is no vehicles currently at this depot");
+		}
+	}
+
+	/**
 	 * This method gets a driver1
 	 * @return the driver
 	 */
@@ -135,6 +189,16 @@ public class Depot implements Serializable
 		return null;
 	}
 
+	public ArrayList<WorkSchedule> getUnassignedWs() {
+		ArrayList<WorkSchedule> unassignedWs = null;
+		for (WorkSchedule workSchedule : workSchedules) {
+			if (workSchedule.getDriverAssigned() == null) {
+				unassignedWs.add(workSchedule);
+			}
+		}
+		return unassignedWs;
+	}
+
 	/**
 	 * This method prints out a list of drivers
 	 */
@@ -156,6 +220,18 @@ public class Depot implements Serializable
 			System.out.println(workSchedule.toString());
 		}
 	}
+
+	/**
+	 * This method prints out a list of work schedules that are unassigned.
+	 */
+	public void listUnassignedWs() {
+		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to"); // Used to format the print in a table like structure
+		for (WorkSchedule workSchedule : workSchedules) {
+			if (workSchedule.getDriverAssigned() == null) {
+				System.out.println(workSchedule.toString());
+				}
+			}
+		}
 
 	/**
 	 * This method prints out a list of completed work schedules
