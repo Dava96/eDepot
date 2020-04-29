@@ -92,12 +92,12 @@ public class Depot implements Serializable
 	{
 		if (!vehicles.isEmpty())
 		{
-			System.out.printf("%-10s %-10s %-15s %8s %10s%n", "Make", "Model", "Registration", "Depot", "Type"); // Used to format the print in a table like structure
+			System.out.printf("%-10s %-10s %-15s %8s %10s %10s %10s %n", "Make", "Model", "Registration", "Depot", "Type", "Driver", "Work Schedule"); // Used to format the print in a table like structure
 			{
 				for (Vehicle vehicle : vehicles)
 				{
-					System.out.printf("%-10s %-10s %-15s %8s %10s %n", vehicle.make, vehicle.model,
-						vehicle.regNo, vehicle.depot, vehicle.getClass().getName());
+					System.out.printf("%-10s %-10s %-15s %8s %10s %10s %10s %n", vehicle.make, vehicle.model,
+						vehicle.regNo, vehicle.depot, vehicle.getClass().getName(), vehicle.driver, vehicle.workSchedule);
 				}
 			}
 		}else {
@@ -190,13 +190,23 @@ public class Depot implements Serializable
 	}
 
 	public ArrayList<WorkSchedule> getUnassignedWs() {
-		ArrayList<WorkSchedule> unassignedWs = null;
+		ArrayList<WorkSchedule> unassignedWs = new ArrayList<>();
 		for (WorkSchedule workSchedule : workSchedules) {
 			if (workSchedule.getDriverAssigned() == null) {
 				unassignedWs.add(workSchedule);
 			}
 		}
 		return unassignedWs;
+	}
+
+	public ArrayList<Vehicle> getUnassignedVehicles() {
+		ArrayList<Vehicle> unAssignedVehicles = new ArrayList<>();
+		for (Vehicle v : vehicles) {
+			if (v.getDriver() == null && v.getWorkSchedule() == null) {
+				unAssignedVehicles.add(v);
+			}
+		}
+		return unAssignedVehicles;
 	}
 
 	/**
@@ -215,7 +225,7 @@ public class Depot implements Serializable
 	 * This method prints out a list of work schedules
 	 */
 	public void listWorkSchedulue() {
-		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to"); // Used to format the print in a table like structure
+		System.out.printf("%-10s %-10s %10s %17s %12s %n", "Client", "Start Date", "End Date", "Assigned to", "Vehicle"); // Used to format the print in a table like structure
 		for (WorkSchedule workSchedule : workSchedules) {
 			System.out.println(workSchedule.toString());
 		}
@@ -225,7 +235,7 @@ public class Depot implements Serializable
 	 * This method prints out a list of work schedules that are unassigned.
 	 */
 	public void listUnassignedWs() {
-		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to"); // Used to format the print in a table like structure
+		System.out.printf("%-10s %-10s %10s %17s %12s %n", "Client", "Start Date", "End Date", "Assigned to", "Vehicle"); // Used to format the print in a table like structure
 		for (WorkSchedule workSchedule : workSchedules) {
 			if (workSchedule.getDriverAssigned() == null) {
 				System.out.println(workSchedule.toString());
@@ -237,9 +247,20 @@ public class Depot implements Serializable
 	 * This method prints out a list of completed work schedules
 	 */
 	public void listCompletedWorkSchedulue() {
-		System.out.printf("%-10s %-10s %10s %17s%n", "Client", "Start Date", "End Date", "Assigned to"); // Used to format the print in a table like structure
+		System.out.printf("%-10s %-10s %10s %17s %12s %n", "Client", "Start Date", "End Date", "Assigned to", "Vehicle"); // Used to format the print in a table like structure
 		for (WorkSchedule workSchedule : completedWorkSchedules) {
 			System.out.println(workSchedule.toString());
+		}
+	}
+
+	public void listUnassignedVehicles() {
+		System.out.printf("%-10s %-10s %-15s %8s %10s %10s %10s %n", "Make", "Model", "Registration", "Depot", "Type", "Driver", "Work Schedule"); // Used to format the print in a table like structure
+		{
+			for (Vehicle vehicle : vehicles)
+			{
+				System.out.printf("%-10s %-10s %-15s %8s %10s %10s %10s %n", vehicle.make, vehicle.model,
+					vehicle.regNo, vehicle.depot, vehicle.getClass().getName(), vehicle.driver, vehicle.workSchedule);
+			}
 		}
 	}
 

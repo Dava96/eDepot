@@ -13,6 +13,8 @@ public abstract class Vehicle implements Serializable
 	protected int weight;
 	protected boolean assigned;
 	protected Depot depot;
+	protected WorkSchedule workSchedule;
+	protected Driver driver;
 
 
 	/**
@@ -30,6 +32,9 @@ public abstract class Vehicle implements Serializable
 		this.weight = weight;
 		this.regNo = regNo;
 		this.depot = depot;
+		this.workSchedule = null;
+		this.driver = null;
+
 	}
 
 	/**
@@ -42,7 +47,7 @@ public abstract class Vehicle implements Serializable
 
 	@Override
 	public String toString() {
-		return make + " " + model + " " + regNo + " " + weight + this.getClass().getSimpleName();
+		return make + " " + model + " " + regNo + " " + weight + this.getClass().getSimpleName() + " "+ driver + " " + workSchedule;
 	}
 
 	/**
@@ -69,4 +74,21 @@ public abstract class Vehicle implements Serializable
 		return depot.toString();
 	}
 
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+
+	public void setWorkSchedule(WorkSchedule workSchedule) {
+		this.workSchedule = workSchedule;
+	}
+
+	public Driver getDriver()
+	{
+		return driver;
+	}
+
+	public WorkSchedule getWorkSchedule()
+	{
+		return workSchedule;
+	}
 }

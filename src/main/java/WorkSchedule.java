@@ -14,6 +14,7 @@ public class WorkSchedule implements Comparable<WorkSchedule>, Serializable
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private Driver driverAssigned;
+	private String vehicleAssigned; // the regNo
 
 	/**
 	 * This is the constrctor for creating a work schedule object
@@ -27,6 +28,7 @@ public class WorkSchedule implements Comparable<WorkSchedule>, Serializable
 		setStartDate(startDate);
 		setEndDate(endDate);
 		this.driverAssigned = null;
+		this.vehicleAssigned = null;
 	}
 
 	public WorkSchedule(String client) throws Exception {
@@ -74,7 +76,7 @@ public class WorkSchedule implements Comparable<WorkSchedule>, Serializable
 
 	@Override
 	public String toString() {
-		return String.format("%-10s %-10s %12s %8s", client, startDate, endDate, driverAssigned);
+		return String.format("%-10s %-10s %12s %8s %16s", client, startDate, endDate, driverAssigned, vehicleAssigned);
 	}
 
 	/**
@@ -129,5 +131,15 @@ public class WorkSchedule implements Comparable<WorkSchedule>, Serializable
 	public int compareTo(WorkSchedule o)
 	{
 		return 0;
+	}
+
+	public String getVehicleAssigned()
+	{
+		return vehicleAssigned;
+	}
+
+	public void setVehicleAssigned(Vehicle vehicleAssigned)
+	{
+		this.vehicleAssigned = vehicleAssigned.regNo;
 	}
 }

@@ -32,7 +32,7 @@ public class DepotSystem
 	{
 		deSerialize();
 
-		/*
+
 		//setDepot("Liverpool");
 		depots.add(new Depot("Lpool")); // 0
 		depots.add(new Depot("Leeds")); // 1
@@ -74,7 +74,7 @@ public class DepotSystem
 		//vehicles.add(new Tanker("Toyota", "A1", 12000, "AN69HTU", "Leeds", 2000, "Water"));
 		//vehicles.add(new Truck("Vauxhall", "DS-54", 13000, "UT19PAL", "MChester", 1500));
 
-		 */
+
 	}
 
 	/**
@@ -288,7 +288,7 @@ public class DepotSystem
 		String client, driver;
 		boolean exit = false, validClient = false, validDriver = false;
 
-		if(depot.getWorkSchedules().isEmpty())
+		if(depot.getWorkSchedules().isEmpty() && !depot.getUnassignedWs().isEmpty())
 		{
 			System.out.printf("%nThere are currently no unassinged work schedules%n");
 			return;
@@ -315,6 +315,7 @@ public class DepotSystem
 								drivers.setAssigned(true);
 								ws.setDriverAssigned(depot.getDriver(driver));
 								exit = true;
+								assignVehicle(depot.getDriver(driver), ws);
 								break;
 							} else if ((!driver.equals(drivers.userName) && drivers.getSchedule() != null)) {
 								validDriver = false;
@@ -332,6 +333,35 @@ public class DepotSystem
 				}
 			} while (!exit);
 		}
+
+
+		public void assignVehicle(Driver driver, WorkSchedule ws) {
+		boolean exit = false;
+			if (depot.getVehicles().isEmpty() && depot.getUnassignedVehicles().isEmpty()) {
+				System.out.println("There no vehicles at this depot\n");
+				return;
+			}
+
+			do {
+				depot.listUnassignedVehicles();
+				System.out.print("Please Enter a vehicles registration:");
+				String registration = input.nextLine();
+
+				for (Vehicle v : depot.getVehicles()) {
+					if (registration.equals(v.regNo) && v.driver == null && !registration.isEmpty() && v.getWorkSchedule() == null) {
+						v.setDriver(driver);
+						v.setWorkSchedule(ws);
+						ws.setVehicleAssigned(v);
+						System.out.println("Vehicle has been assigned a work schedule and driver");
+						exit = true;
+						return;
+					} else {
+						System.out.println("You entered a invalid registration");
+					}
+				}
+			} while (exit);
+		}
+
 
 	public void createWorkSchedule() {
 
@@ -374,8 +404,12 @@ public class DepotSystem
 	{
 		boolean found = false, assigned = false, invalidInput;
 		WorkSchedule ws;
+
+		if (depot.getWorkSchedules().isEmpty()) { // Make sure there is still active work schedules
+				System.out.printf("%nThere are currently no active work schedules%n");
+				return;
+		}
 		do {
-			if(depot.getWorkSchedules().size() ==0) { // Make sure there is still active work schedules
 				depot.listWorkSchedulue();
 				System.out.printf("%nEnter the name of the client's schedule you wish to set as complete: ");
 				String choice = input.nextLine();
@@ -390,6 +424,7 @@ public class DepotSystem
 				} if (!assigned) {
 					System.out.printf("%nPlease enter a schedule that has a Driver assigned to it.%n");
 					found = true; // This is so if there is no schedules with a driver assigned to it, it will break the loop.
+				break;
 				}
 
 				ws = depot.getWorkSchedule(choice);
@@ -404,15 +439,23 @@ public class DepotSystem
 																			// the one we want to delete
 							driver.setSchedule(null); // Deletes schedule from driver
 							driver.setAssigned(false); // Sets the drivers assigned attribute to false
+							System.out.println("Work schedule completed");
 							sortWorkSchedule(); // Sorts the workschedulues by Start date
+							nullVehicles(ws);
+						} else {
+							System.out.println("Enter A valid input");
 						}
 					}
 
 				}
-			} else {
-				System.out.printf("%nThere are currently no active work schedules%n");
-			}
 		} while (!found);
+	}
+
+	public void nullVehicles(WorkSchedule ws) {
+		Vehicle v = depot.getVehiclebyReg(ws.getVehicleAssigned());
+		v.setDriver(null);
+		v.setWorkSchedule(null);
+		return;
 	}
 
 	 /*public void listVehicles()
