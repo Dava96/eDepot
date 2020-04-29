@@ -47,9 +47,17 @@ public class DepotSystem
 		depots.get(0).addDriver(new Driver("Bart", "_Bart", false, false, getDepot("MChester")));
 
 		WorkSchedule bob = new WorkSchedule("Bob", LocalDate.parse("2020-05-05"), LocalDate.parse("2020-05-06"));
-		WorkSchedule Gary = new WorkSchedule("Gary", LocalDate.parse("2020-04-29"), LocalDate.parse("2020-05-01"));
-		depots.get(1).addWorkSchedule(bob);
-		depots.get(1).addWorkSchedule(Gary);
+		WorkSchedule Gary = new WorkSchedule("Gary", LocalDate.parse("2020-05-14"), LocalDate.parse("2020-05-17"));
+		WorkSchedule Sam = new WorkSchedule("Sam", LocalDate.parse("2020-05-14"), LocalDate.parse("2020-05-17"));
+		WorkSchedule Chris = new WorkSchedule("Chris", LocalDate.parse("2020-05-14"), LocalDate.parse("2020-05-17"));
+		WorkSchedule Fitz = new WorkSchedule("Fitz", LocalDate.parse("2020-05-14"), LocalDate.parse("2020-05-17"));
+		WorkSchedule David = new WorkSchedule("David", LocalDate.parse("2020-05-14"), LocalDate.parse("2020-05-17"));
+		depots.get(0).addWorkSchedule(bob);
+		depots.get(0).addWorkSchedule(Gary);
+		depots.get(1).addWorkSchedule(Sam);
+		depots.get(1).addWorkSchedule(Chris);
+		depots.get(2).addWorkSchedule(Fitz);
+		depots.get(2).addWorkSchedule(David);
 
 		//depots.get(0).addDriver((new Driver("Spongebob", "Garysnail1", false, false)));
 		//depots.get(0).addDriver((new Driver("Homer", "Donutdonut1", false, true)));
@@ -147,41 +155,20 @@ public class DepotSystem
 			do
 			{
 				System.out.printf(
-					"%n[1] View your assigned work schedules %n[2] Create a new work schedule %n[3] Set a work schedule %n[4] View vehicles %n" +
-						"[5] Reassign vehicles %n[6] Set a work schedule as complete %n[7] View archived work schedules %n[8] Create Driver" +
-						"%n[9] Create Vehicle %n[10] Exit%n%nSelect your option: ");
+					"%n[1] Work Schedule Menu %n[2] Vehicle Menu %n[3] Create Driver %n[4] Exit %n%nSelect your option:");
 				choice = input.nextLine();
 				switch (choice)
 				{
 					case "1":
-						System.out.println(driver.getSchedule());
+						workScheduleMenu();
 						break;
 					case "2":
-						// Create a work schedule
-						createWorkSchedule();
+						vehicleMenu();
 						break;
 					case "3":
-						assignSchedule();
-						break;
-					case "4":
-						depots.get(depotNo).listVehicles();
-						break;
-					case "5":
-						reAssignVehicles();
-						break;
-					case "6":
-						completeWorkSchedule();
-						break;
-					case "7":
-						depots.get(depotNo).listCompletedWorkSchedulue();
-						break;
-					case "8":
 						createDriver();
 						break;
-					case "9":
-						createVehicle();
-						break;
-					case "10":
+					case "4":
 						entryMenu();
 						break;
 					// exit the system
@@ -202,11 +189,70 @@ public class DepotSystem
 						System.out.println(driver.getSchedule());
 						break;
 					case "2":
-						depotMenu();
+						entryMenu();
 						break;
 				}
 			} while (true);
 		}
+	}
+
+	public void vehicleMenu() throws Exception {
+		do {
+			String choice;
+			System.out.printf("%n[1] List All Vehicles %n[2] List Trucks %n[3] List Tankers %n[4] Create Vehicle%n[5] Reassign Vehicle %n[6] Exit%n%n Select your option:");
+			choice = input.nextLine();
+
+			switch (choice) {
+				case "1":
+					depot.listVehicles();
+					break;
+				case "2":
+					depot.listTrucks();
+					break;
+				case "3":
+					depot.listTankers();
+					break;
+				case "4":
+					createVehicle();
+					break;
+				case "5":
+					reAssignVehicles();
+					break;
+				case "6":
+					depotMenu();
+					break;
+			}
+		} while (true);
+	}
+
+	public void workScheduleMenu() throws Exception {
+		do {
+			String choice;
+			System.out.printf("%n[1] View your Work Schedule %n[2] Create Work Schedule %n[3] Assign Schedule %n[4] Set schedule as complete %n[5] List Completed Work Schedule" +
+				"%n[6] Exit%n Select your option:");
+			choice = input.nextLine();
+
+			switch (choice) {
+				case "1":
+					System.out.println(driver.getSchedule());
+					break;
+				case "2":
+					createWorkSchedule();
+					break;
+				case "3":
+					assignSchedule();
+					break;
+				case "4":
+					completeWorkSchedule();
+					break;
+				case "5":
+					depot.listCompletedWorkSchedulue();
+					break;
+				case "6":
+					depotMenu();
+					break;
+			}
+		} while (true);
 	}
 
 	/**
@@ -242,28 +288,32 @@ public class DepotSystem
 		String client, driver;
 		boolean exit = false, validClient = false, validDriver = false;
 
-		if(depots.get(depotNo).getWorkSchedules().size() != 0) {
+		if(depot.getWorkSchedules().isEmpty())
+		{
+			System.out.printf("%nThere are currently no unassinged work schedules%n");
+			return;
+		}
 			do {
-				depots.get(depotNo).listWorkSchedulue();
+				depot.listUnassignedWs();
 				System.out.print("Enter the client name for the schedule you wish to assign: ");
 				client = input.nextLine();
 
-				for (WorkSchedule ws : depots.get(depotNo).getWorkSchedules()) {
+				for (WorkSchedule ws : depot.getWorkSchedules()) {
 					if (client.equals(ws.getClient())) {
 						validClient = true;
 						System.out.printf("%n%20s%n", "Drivers");
-						depots.get(depotNo).listDrivers();
+						depot.listDrivers();
 						System.out.print("Which Driver do you want to assign this to: ");
 						driver = input.nextLine();
 
-						for (Driver drivers : depots.get(depotNo).getDrivers()) {
+						for (Driver drivers : depot.getDrivers()) {
 							if (driver.equals(drivers.userName) && drivers.getSchedule() == null) {
 								validDriver = true;
 								System.out.printf("%nThe work schedule for client %s is now assigned to %s.%n ", client,
 									driver);
-								depots.get(depotNo).getDriver(driver).setSchedule(depots.get(depotNo).getWorkSchedule(client));
+								depot.getDriver(driver).setSchedule(depot.getWorkSchedule(client));
 								drivers.setAssigned(true);
-								ws.setDriverAssigned(depots.get(depotNo).getDriver(driver));
+								ws.setDriverAssigned(depot.getDriver(driver));
 								exit = true;
 								break;
 							} else if ((!driver.equals(drivers.userName) && drivers.getSchedule() != null)) {
@@ -282,11 +332,6 @@ public class DepotSystem
 				}
 			} while (!exit);
 		}
-		else {
-			System.out.printf("%nThere are currently no unassinged work schedules%n");
-		}
-
-	}
 
 	public void createWorkSchedule() {
 
@@ -303,7 +348,7 @@ public class DepotSystem
 			try {
 				// Try and create an object of the work schedule class with the user defined
 				// parameters
-				depots.get(depotNo).addWorkSchedule( new WorkSchedule(client, LocalDate.parse(startDate), LocalDate.parse(endDate)));
+				depot.addWorkSchedule( new WorkSchedule(client, LocalDate.parse(startDate), LocalDate.parse(endDate)));
 				//WorkSchedule schedule = new WorkSchedule(client, LocalDate.parse(startDate), LocalDate.parse(endDate));
 				sortWorkSchedule();
 				System.out.printf("%nWork schedule successfully created %n%n");
@@ -320,23 +365,23 @@ public class DepotSystem
 	}
 
 	public void sortWorkSchedule() { // sorts both the workSchedule and Completed workSchedule arrayLists by start date
-		depots.get(depotNo).getWorkSchedules().sort(Comparator.comparing(WorkSchedule::getStartDate));
-		depots.get(depotNo).getCompletedWorkSchedules().sort(Comparator.comparing(WorkSchedule::getStartDate));
+		depot.getWorkSchedules().sort(Comparator.comparing(WorkSchedule::getStartDate));
+		depot.getCompletedWorkSchedules().sort(Comparator.comparing(WorkSchedule::getStartDate));
 		//completedWorkSchedules.sort(Comparator.comparing(WorkSchedule::getStartDate));
 	}
 
 	public void completeWorkSchedule() throws Exception
 	{
-		boolean found = false, assigned = false;
+		boolean found = false, assigned = false, invalidInput;
 		WorkSchedule ws;
 		do {
-			if(depots.get(depotNo).getWorkSchedules().size() !=0) { // Make sure there is still active work schedules
-				depots.get(depotNo).listWorkSchedulue();
+			if(depot.getWorkSchedules().size() ==0) { // Make sure there is still active work schedules
+				depot.listWorkSchedulue();
 				System.out.printf("%nEnter the name of the client's schedule you wish to set as complete: ");
 				String choice = input.nextLine();
 					//LocalDate.parse("2020-05-08")); // Used as a place holder that we set equal to an existing schedulue
 				// needs fixing
-				for (WorkSchedule schedule : depots.get(depotNo).getWorkSchedules()) {
+				for (WorkSchedule schedule : depot.getWorkSchedules()) {
 					if (choice.equals(schedule.client) && schedule.getDriverAssigned() != null) {
 						found = true; assigned = true;
 					} else {
@@ -347,11 +392,11 @@ public class DepotSystem
 					found = true; // This is so if there is no schedules with a driver assigned to it, it will break the loop.
 				}
 
-				ws = depots.get(depotNo).getWorkSchedule(choice);
-				depots.get(depotNo).addCompletedWorkSchedule(ws);
-				depots.get(depotNo).getWorkSchedules().remove(ws);
+				ws = depot.getWorkSchedule(choice);
+				depot.addCompletedWorkSchedule(ws);
+				depot.getWorkSchedules().remove(ws);
 
-				for (Driver driver : depots.get(depotNo).getDrivers()) {
+				for (Driver driver : depot.getDrivers()) {
 					if (driver.getSchedule() != null) { // Checks if a driver has an assigned schedule
 						WorkSchedule ws1 = driver.getSchedule();
 						String client = ws1.getClient();
@@ -393,15 +438,18 @@ public class DepotSystem
 		boolean exit = false, validReg = false, validLocation = false;
 		int i = 0; // used to count which depot selected
 		Vehicle v;
-		if (!depots.get(depotNo).getVehicles().isEmpty())
+		if (depot.getVehicles().isEmpty())
 		{
+			System.out.println("There are no vehicles in the Depot to reassign");
+			return;
+		}
 			do
 			{
 				System.out.println("Depots");
-				depots.get(depotNo).listVehicles();
+				depot.listVehicles();
 				System.out.printf("%nSelect the registration number of the vehicle you wish to reassign: %n");
 				vehicleSelection = input.nextLine();
-				for (Vehicle vehicle : depots.get(depotNo).getVehicles())
+				for (Vehicle vehicle : depot.getVehicles())
 				{
 
 					if (vehicleSelection.equals(vehicle.getRegNo()))
@@ -417,6 +465,7 @@ public class DepotSystem
 							if (depotSelection.equals(d.getDepotLocation()) && !depotSelection.equals(vehicle.getDepot())) // if the vehicle exists at depot
 							{
 								validLocation = true;
+								validReg = true;
 								System.out.printf("%nVehicle %s is now assigned to %s%n", vehicleSelection, depotSelection);
 									exit = true;
 									break;
@@ -443,18 +492,14 @@ public class DepotSystem
 					System.out.printf("%nThe vehicle is either already assigned to the depot, or the depot does not exist%n%n");
 				}
 				if (validLocation) {
-					v = depots.get(depotNo).getVehiclebyReg(vehicleSelection);
+					v = depot.getVehiclebyReg(vehicleSelection);
 					v.setDepot(getDepot(depotSelection));
 					depots.get(i).makeVehicle(v);
-					depots.get(depotNo).getVehicles().remove(v);
+					depot.getVehicles().remove(v);
 				}
 
 			} while (!exit);
-		} else {
-			System.out.println("There are no vehicles in the Depot to reassign");
 		}
-
-	}
 
 	/**
 	 * This method allows a user with manager permission to add a
@@ -462,87 +507,62 @@ public class DepotSystem
 	 * and the vehicle will be added.
 	 *
 	 */
-	public void createVehicle()
+	public void createVehicle() throws Exception
 	{
-		String vMake, vModel = "", vRegNo = "", vDepo, yesNo, liquidType = "";
 		int weight = 0, capacity = 0;
-		Depot depotLocation = null;
-		boolean isTruck = false, isTanker = false, exit = false, validLocation = true, duplicateReg = true;
+		boolean exit = false, validNumber = false;
 		do
 		{
 			System.out.printf("%nEnter the Vehicles Make i.e [Toyota] : ");
-			vMake = input.nextLine().trim();
-			if (!vMake.matches(".*\\d.*")) { // This prevents the user from entering numbers as a name.
+			String vMake = input.nextLine().trim();
+			if (!vMake.matches(".*\\d.*") && !vMake.isEmpty())
+			{ // This prevents the user from entering numbers as a name.
 
 				System.out.printf("%nEnter the Vehicles Model i.e [DS-12]: ");
-				vModel = input.nextLine().trim().toUpperCase();
+				String vModel = input.nextLine().trim().toUpperCase();
 
 				System.out.printf("%nEnter the Vehicles RegNo: i.e [UT19PAL]: ");
-				vRegNo = input.nextLine().toUpperCase();
+				String vRegNo = input.nextLine().toUpperCase();
+				if (isRegistationUnique(vRegNo) && !vRegNo.isEmpty())
+				{
 
-				try {
-					System.out.printf("%nEnter the Vehicles capacity: i.e [2500]: ");
-					capacity = Integer.parseInt(input.nextLine()); // I have parsed a int from a string because using nextInt alone was causing errors later in the method.
-
-					System.out.printf("%nEnter the Vehicles weight: i.e [12000]: ");
-					weight = Integer.parseInt(input.nextLine());
-
-				} catch (NumberFormatException e) {
-					System.out.println("Please Enter a valid number.");
-					//e.printStackTrace(); // debugging code
-					break;
+					System.out.printf("%nEnter the Vehicles capacity between 0 and 7000: i.e [2500]: ");
+					int tempCapacity = Integer.parseInt(input.nextLine()); // I have parsed a int from a string because using nextInt alone was causing errors later in the method.
+					System.out.printf("%nEnter the Vehicles weight between 0 and 25000: i.e [12000]: ");
+					if (tempCapacity > 0 && tempCapacity < 7000) {
+						capacity = tempCapacity;
+						validNumber = true;
 				}
-
-				for (Vehicle v : depots.get(depotNo).getVehicles()) {
-					if (vRegNo.equals(v.getRegNo()))
-					{
-						duplicateReg = false;
+					int temp = Integer.parseInt(input.nextLine());
+					if (temp > 0  && temp < 25000) {
+						weight = temp;
+						validNumber = true;
+					} if (!validNumber) {
+						System.out.println("Please Enter a valid number.");
 						break;
-					}
-				}	if (!duplicateReg) { // If the registration is duplicate, print this line
-					System.out.println("You have Entered a duplicate Registration number");
+				}
+			} else {
+					System.out.println("Please Enter a Valid and Unique Registration");
 					break;
 				}
 				System.out.printf("%nIs the vehicle a Truck or Tanker: ");
-				yesNo = input.nextLine().toLowerCase();
+				String yesNo = input.nextLine().toLowerCase();
 				if (yesNo.equals("truck")) {
-					isTruck = true;
+					depot.makeVehicle(new Truck(vMake, vModel, weight, vRegNo, getDepot(), capacity));
+					exit = true;
+					break;
 				} if (yesNo.equals("tanker")) {
-					isTanker = true;
 					System.out.printf("%nEnter the Liquid type i.e [Oil]: ");
-					liquidType = input.nextLine();
-				} else if (!yesNo.equals("truck")) { // else if it doesn't equal truck it can't equal tanker either.
+					String liquidType = input.nextLine();
+				depot.makeVehicle(new Tanker(vMake, vModel, weight, vRegNo, getDepot(), capacity, liquidType));
+				exit = true;
+				break;
+				} else // else if it doesn't equal truck it can't equal tanker either.
 					System.out.println("Enter a valid vehicle type, either truck or tanker.");
 					break;
-				}
-
-				System.out.printf("%nDepots%n%n");
-				listDepots();
-				System.out.printf("%nEnter the depots Location: ");
-				vDepo = input.nextLine();
-				for (Depot depot : depots)
-				{
-					if (vDepo.equals(depot.getDepotLocation())) // checks if the depot location that the user entered exists
-					{
-						validLocation = true;
-						depotLocation = getDepot(vDepo);
-						exit = true;
-						break;
-					} else {
-						validLocation = false;
-					}
-				}
-			} else {
-				System.out.println("Please Enter a name without Numbers.");
+				} else {
+				System.out.println("Please Enter a valid name without numbers.");
 			}
-			if (!validLocation) {
-				System.out.println("Please Enter a valid location.");
-			}
-			if (isTanker) {
-				depots.get(depotNo).makeVehicle(new Tanker(vMake, vModel, weight, vRegNo, depotLocation, capacity, liquidType));
-			} if (isTruck) {
-			depots.get(depotNo).makeVehicle(new Truck(vMake, vModel, weight, vRegNo, depotLocation, capacity));
-		}
 		} while (!exit);
 
 	}
@@ -554,13 +574,13 @@ public class DepotSystem
 	 */
 	public void createDriver()
 	{
-		String driverName, driverPassword, depotLocation, yesNo;
-		boolean isManager = false, exit = false, validLocation = true;
+		String driverName, driverPassword, yesNo;
+		boolean isManager = false, exit = false;
 		do
 		{
 			System.out.printf("%nEnter the drivers name: ");
 			driverName = input.nextLine().trim();
-			if (!driverName.matches(".*\\d.*")) { // prevents entering numbers as a name
+			if (!driverName.matches(".*\\d.*") && isUserNameUnique(driverName)) { // prevents entering numbers as a name and duplicate name
 
 				System.out.printf("%nEnter the drivers password: ");
 				driverPassword = input.nextLine().trim();
@@ -572,29 +592,14 @@ public class DepotSystem
 				} else if (yesNo.contains("no")) {
 					isManager = false;
 				}
-
-				System.out.printf("%nDepots%n%n");
-				listDepots();
-				System.out.printf("%nEnter the depots Location: ");
-				depotLocation = input.nextLine();
-				for (Depot depot : depots)
-				{
-					if (depotLocation.equals(depot.getDepotLocation()))
-					{
-						validLocation = true;
-						depots.get(depotNo).addDriver(new Driver(driverName, driverPassword, false, isManager, getDepot(depotLocation))); // assigned is always false
+				depot.addDriver(new Driver(driverName, driverPassword, false, isManager, getDepot())); // assigned is always false
+				System.out.println("Driver " + driverName + " has been created.");
 						exit = true;
 						break;
-					} else {
-						validLocation = false;
-					}
-				}
+
 			} else {
-				System.out.println("Please Enter a name without Numbers.");
+				System.out.println("The Username you entered is a duplicate or it contains numbers.");
 			}
-			if (!validLocation) {
-				System.out.println("Please Enter a valid location.");
-		}
 
 	} while (!exit);
 
@@ -632,6 +637,46 @@ public class DepotSystem
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * This method returns a boolean
+	 * @param userName The method searches to see if there is
+	 * a user with a duplicate name.
+	 * @return Returns the false if there is no match,
+	 * otherwise it returns true.
+	 */
+	public boolean isUserNameUnique(String userName) {
+		ArrayList<Driver> drivers;
+		for (Depot depot : depots) {
+			drivers = depot.getDrivers();
+			for (Driver d : drivers) {
+				if (userName.equals(d.userName)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * This method returns a boolean
+	 * @param registration The method searches to see if there is
+	 * a registration that is a duplicate.
+	 * @return Returns the false if there is no match,
+	 * otherwise it returns true.
+	 */
+	public boolean isRegistationUnique(String registration) {
+		List<Vehicle> vehicles;
+		for (Depot depot : depots) {
+			vehicles = depot.getVehicles();
+			for (Vehicle v : vehicles) {
+				if (registration.equals(v.regNo)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	/**

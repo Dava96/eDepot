@@ -23,7 +23,8 @@ public class Tanker extends Vehicle
 	 * @param liquidCapacity The capacity of the tanker
 	 * @param liquidType The liquid type the tanker holds
 	 */
-	public Tanker(String make, String model, Integer weight, String regNo, Depot depot, Integer liquidCapacity, String liquidType) {
+	public Tanker(String make, String model, Integer weight, String regNo, Depot depot, Integer liquidCapacity, String liquidType) throws Exception
+	{
 		super(make, model, weight, regNo, depot);
 
 		this.liquidType = liquidType;
